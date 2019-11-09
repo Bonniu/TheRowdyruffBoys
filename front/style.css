@@ -13,6 +13,10 @@ header{
   padding: 8% 0 0;
   margin: auto;
 }
+.add-page {
+  padding: 8% 0 0;
+  text-align: center;
+}
 .form {
   position: relative;
   z-index: 1;
