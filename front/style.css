@@ -101,13 +101,27 @@ header{
   color: #EF3B3A;
 }
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-  background: -moz-linear-gradient(right, #76b852, #8DC26F);
-  background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #76b852, #8DC26F);
+  background: #5b7ae0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #5b7ae0, rgb(199, 68, 68));
+  background: -moz-linear-gradient(right, #5b7ae0, rgb(199, 68, 68));
+  background: -o-linear-gradient(right, #5b7ae0, rgb(199, 68, 68));
+  background: linear-gradient(to left, #5b7ae0, rgb(199, 68, 68));
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
 
+#verifyForm{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#creatorElement{
+ margin-left: 50px;
+ margin-right: 50px;
+ margin-top:10px;
+ height: 100%; 
+ overflow: hidden;
+}
