@@ -9,39 +9,58 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="scripts.js"></script>
 
     <title>TESTY</title>
 </head>
 
 <body>
-
-    <header>
+    <header id="navbar">
         <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
 
-            <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff Boys</a>
-      
-        
-			<div class="collapse navbar-collapse">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							Dodaj test
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+            <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt="">
+                Rowdyruff Boys</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="NewTest.html">
+                            Dodaj test
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
-	
-	<div>
-		<a>
-			Lista testów:
-		</a>
-		<a href="example_test.html">
-			Test1
-		</a>
-	</div>
+
+    <div class="container-fluid">
+        <div class="raw ">
+            <div class="content">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Test number</th>
+                            <th>Date</th>
+                            <th>Topic</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class='clickable-row' data-href='example_test.html'>
+                            <td>1</td>
+                            <td>13-11-2019</td>
+                            <td>Java Script</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="raw">
+            <div class="footer">
+
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -50,6 +69,7 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
 
 </body>
 
