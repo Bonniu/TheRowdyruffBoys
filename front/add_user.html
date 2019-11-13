@@ -27,11 +27,23 @@
 	
 	<div class="add-page">
 			<form>
-				Imię: <input type='text' name='imie' /><br>
-				Nazwisko: <input type='text' name='nazwisko' /><br>
-				Adres: <input type='text' name='adres' /><br>
-				Pesel: <input type='text' name='pesel' /><br>
-				<input type="submit" value='Wyslij' /><br>
+				<div class='form-group'>
+					<label for='PrzykladoweImie'>Imię:</label>
+					<input type='text' name='imie' class='form-control' id='imie' placeholder='Podaj imię'>
+				</div>
+				<div class='form-group'>
+					<label for='PrzykladoweNazwisko'>Nazwisko:</label>
+					<input type='text' name='nazwisko' class='form-control' id='PrzykladoweNazwisko' placeholder='Podaj Nazwisko'>
+				</div>
+				<div class='form-group'>
+					<label for='PrzykladowyAdres'>Adres email:</label>
+				<input type='email' name='adres' class='form-control' id='PrzykladowyAdres' placeholder='Podaj Adres Email'>
+					</div>
+				<div class='form-group'>
+					<label for='PrzykladowyPesel'>Pesel:</label>
+					<input type='text' name='pesel' class='form-control' id='PrzykladowyPesel' placeholder='Podaj Pesel'>
+				</div>
+				<button type='submit' class='btn btn-primary'>Wyslij</button>
 			</form>
 	</div>
 

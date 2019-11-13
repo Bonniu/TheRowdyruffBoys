@@ -14,8 +14,10 @@ header{
   margin: auto;
 }
 .add-page {
+  width: 360px;
   padding: 8% 0 0;
   text-align: center;
+  margin: auto;
 }
 .form {
   position: relative;
