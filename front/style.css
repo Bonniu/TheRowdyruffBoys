@@ -40,16 +40,19 @@ header{
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
+#button-confirm {
+	border: none; /* <-- This thing here */
+	border:solid 1px #3e8c35;
+    border-radius: 20px;
+	font-weight: bold;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
   background: #4CAF50;
   width: 100%;
-  border: 0;
   padding: 15px;
   color: #FFFFFF;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
