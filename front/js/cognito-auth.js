@@ -1,6 +1,6 @@
-/*global WildRydes _config AmazonCognitoIdentity AWSCognito*/
 
-var WildRydes = window.WildRydes || {};
+
+var RowdyruffBoys = window.RowdyruffBoys || {};
 
 (function scopeWrapper($) {
     var signinUrl = 'signin.html';
@@ -25,11 +25,11 @@ var WildRydes = window.WildRydes || {};
         AWSCognito.config.region = _config.cognito.region;
     }
 
-    WildRydes.signOut = function signOut() {
+    RowdyruffBoys.signOut = function signOut() {
         userPool.getCurrentUser().signOut();
     };
 
-    WildRydes.authToken = new Promise(function fetchCurrentAuthToken(resolve, reject) {
+    RowdyruffBoys.authToken = new Promise(function fetchCurrentAuthToken(resolve, reject) {
         var cognitoUser = userPool.getCurrentUser();
 
         if (cognitoUser) {
@@ -117,7 +117,6 @@ var WildRydes = window.WildRydes || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-				alert('Successfully Logged In');
                 window.location.href = 'recruiter.html';
             },
             function signinError(err) {
@@ -136,7 +135,6 @@ var WildRydes = window.WildRydes || {};
             console.log('user name is ' + cognitoUser.getUsername());
             var confirmation = ('Registration successful. Please check your email inbox or spam folder for your verification code.');
             if (confirmation) {
-				alert('Registration successful. Please check your email inbox or spam folder for your verification code.');
                 window.location.href = 'verify.html';
             }
         };
