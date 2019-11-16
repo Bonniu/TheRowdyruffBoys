@@ -7,10 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="scripts.js"></script>
-
     <title>ADD USER</title>
 </head>
 
@@ -26,7 +23,7 @@
 	
 	
 	<div class="add-page">
-			<form>
+			<form id="adminCreateUser">
 				<div class='form-group'>
 					<label for='PrzykladoweImie'>Imię:</label>
 					<input type='text' name='imie' class='form-control' id='imie' placeholder='Podaj imię'>
@@ -37,13 +34,13 @@
 				</div>
 				<div class='form-group'>
 					<label for='PrzykladowyAdres'>Adres email:</label>
-				<input type='email' name='adres' class='form-control' id='PrzykladowyAdres' placeholder='Podaj Adres Email'>
-					</div>
+					<input type='email' name='adres' class='form-control' id='PrzykladowyAdres' placeholder='Podaj Adres Email'>
+				</div>
 				<div class='form-group'>
 					<label for='PrzykladowyPesel'>Pesel:</label>
 					<input type='text' name='pesel' class='form-control' id='PrzykladowyPesel' placeholder='Podaj Pesel'>
 				</div>
-				<button type='submit' class='btn btn-primary'>Wyslij</button>
+				<input type="submit" value="Wyslij" id="button-confirm">
 			</form>
 	</div>
 
@@ -53,7 +50,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <s cript src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/vendor/jquery-3.1.0.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+    <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+    <script src="https://js.arcgis.com/4.3/"></script>
+    <script src="js/config.js"></script>
+	<script src="js/aws-sdk.js"></script>
+	<!-- <script src="js/aws-sdk.min.js"></script> -->
+    <script src="js/cognito-auth.js"></script>
+    <script src="js/addUser.js"></script>
 
 </body>
 
