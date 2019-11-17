@@ -15,3 +15,10 @@ RowdyruffBoys.map = RowdyruffBoys.map || {};
         window.location.href = '/signin.html';
     });
 }(jQuery));
+
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+ });
