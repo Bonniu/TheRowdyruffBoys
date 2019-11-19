@@ -7,12 +7,13 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="shortcut icon" type="image/jpg" href="img/Rowdyruff_Boys.jpg" />
-    <title>Main Page</title>
+	<link rel="shortcut icon" type="image/jpg" href="img/Rowdyruff_Boys.jpg" />
+
+    <title>Candidate sign in</title>
 </head>
 
 <body>
-	<header>
+    <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
 
             <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
@@ -34,22 +35,25 @@
             </div>
         </nav>
     </header>
-	<div class="login-page">
-	  <div class="form">
-		<form class="login-form">
-				<a href="signinAsCandidate.html" class="btn btn-primary btn-lg btn-block">Sign in as a candidate</a>
-				<br>
-                <a href="signin.html" class="btn btn-primary btn-lg btn-block">Sign in as a recruiter</a>
-                <br>
-                <a href="register.html" class="btn btn-warning btn-lg btn-block">Sign up for recruiter</a>
-				<br>
-		</form>
-	  </div>
-	</div>
-	<script src="js/vendor/jquery-3.1.0.js"></script>
+    <div class="login-page">
+            <div class="form">
+              <div id="signinFormCandidate">
+                <form class="login-form">
+					<p>CANDIDATE</p>
+                  <input type="email" id="emailInputSigninCandidate" placeholder="E-mail" required/>
+                  <input type="password" id="passwordInputSigninCandidate" placeholder="Password" pattern=".*" required/>
+                  <input type="submit" value="Sign in" id="button-confirm">
+                  <p class="message">Not registered? Send e-mail to your recruiter and ask him for creating an account.</p>
+                </form>
+              </div>
+            </div>
+          </div>
+	
+	 <script src="js/vendor/jquery-3.1.0.js"></script>
       <script src="js/vendor/bootstrap.min.js"></script>
       <script src="js/vendor/aws-cognito-sdk.min.js"></script>
       <script src="js/vendor/amazon-cognito-identity.min.js"></script>
-	<script src="scripts.js"></script>
+      <script src="js/config-candidate.js"></script>
+      <script src="js/cognito-auth-candidate.js"></script>
+	  	<script src="scripts.js"></script>
 </body>
-</html>

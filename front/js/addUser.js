@@ -6,7 +6,7 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: 'us-east-1:10db05a2-5aca-41b9-adb3-e82ab15c5d2f'
 });
 
-AWS.config.update({ region: 'us-east-1', accessKeyId: 'ASIA6PCH5ICRF3YHSI2Z', secretAccessKey: '9UMxG0OANneFPBNw3QC4vingH6AqMWKBEP5rwVHr' });
+//AWS.config.update({ region: 'us-east-1', accessKeyId: 'ASIA6PCH5ICRF3YHSI2Z', secretAccessKey: '9UMxG0OANneFPBNw3QC4vingH6AqMWKBEP5rwVHr' });
 
 // AWS.config.region = 'us-east-1'; // Region
 // AWS.config.credentials = new AWS.CognitoIdentityCredentials({

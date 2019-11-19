@@ -65,26 +65,16 @@
     </header>
 	
 	
-	<div class="add-page">
-			<form id="adminCreateUser">
-				<div class='form-group'>
-					<label for='PrzykladoweImie'>Imię:</label>
-					<input type='text' name='imie' class='form-control' id='imie' placeholder='Podaj imię'>
-				</div>
-				<div class='form-group'>
-					<label for='PrzykladoweNazwisko'>Nazwisko:</label>
-					<input type='text' name='nazwisko' class='form-control' id='PrzykladoweNazwisko' placeholder='Podaj Nazwisko'>
-				</div>
-				<div class='form-group'>
-					<label for='PrzykladowyAdres'>Adres email:</label>
-					<input type='email' name='adres' class='form-control' id='PrzykladowyAdres' placeholder='Podaj Adres Email'>
-				</div>
-				<div class='form-group'>
-					<label for='PrzykladowyPesel'>Pesel:</label>
-					<input type='text' name='pesel' class='form-control' id='PrzykladowyPesel' placeholder='Podaj Pesel'>
-				</div>
-				<input type="submit" value="Wyslij" id="button-confirm">
-			</form>
+	<div class="login-page">
+	  <div class="form">
+		<form class="login-form" id="registrationFormForCandidate">
+            <input type="email" id="emailInputRegisterCandidate" placeholder="Email" pattern=".*" required>
+            <input type="password" id="passwordInputRegisterCandidate" placeholder="Password" pattern=".*" required>
+            <input type="password" id="password2InputRegisterCandidate" placeholder="Confirm Password" pattern=".*" required>
+			<input type="submit" value="Register Candidate" id="button-confirm">
+		  <!-- <a href="verify.html" class="btn btn-success btn-lg btn-block">register</a> <!-- do zmiany potem w zaleznosci od tego do jakiej puli uzytkownikow nalezy NA CHWILE KOMENTARZ-->  
+		</form>
+	  </div>
 	</div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -105,6 +95,8 @@
     <script src="js/cognito-auth.js"></script>
     <script src="js/addUser.js"></script>
 	<script src="js/recruiter.js"></script>
+	<script src="js/config-candidate.js"></script>
+	<script src="js/cognito-auth-candidate.js"></script>
 
 </body>
 
