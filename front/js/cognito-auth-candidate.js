@@ -128,8 +128,8 @@ var RowdyruffBoys = window.RowdyruffBoys || {};
 
     function handleRegister(event) {
         var email = $('#emailInputRegisterCandidate').val();
-        var password = $('#passwordInputRegisterCandidate').val();
-        var password2 = $('#password2InputRegisterCandidate').val();
+        var password = 'trudneHaslo123!'
+        var password2 = 'trudneHaslo123!'
 
         var onSuccess = function registerSuccess(result) {
             var cognitoUser = result.user;
