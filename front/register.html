@@ -7,20 +7,41 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- <script src="scripts.js"></script>  BO NIC TAM NIE MA I SIE PLUJE-->
     <link rel="shortcut icon" type="image/jpg" href="img/Rowdyruff_Boys.jpg" />
 
-    <title>Main Page</title>
+    <title>Sign up</title>
 </head>
 
 <body>
+	<header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
+
+            <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
+                Boys</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            Start
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
 	<div class="login-page">
 	  <div class="form">
 		<form class="login-form" id="registrationForm">
             <input type="email" id="emailInputRegister" placeholder="Email" pattern=".*" required>
             <input type="password" id="passwordInputRegister" placeholder="Password" pattern=".*" required>
             <input type="password" id="password2InputRegister" placeholder="Confirm Password" pattern=".*" required>
-			<input type="submit" value="Register" class="btn btn-success btn-lg btn-block">
+			<input type="submit" value="Register" id="button-confirm">
 		  <!-- <a href="verify.html" class="btn btn-success btn-lg btn-block">register</a> <!-- do zmiany potem w zaleznosci od tego do jakiej puli uzytkownikow nalezy NA CHWILE KOMENTARZ-->  
 		</form>
 	  </div>
@@ -31,5 +52,6 @@
         <script src="js/config.js"></script>
         <script src="js/cognito-auth.js"></script>
 		 <script src="js/vendor/bootstrap.min.js"></script>
+		     <script src="scripts.js"></script>
 </body>
 </html>

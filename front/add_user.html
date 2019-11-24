@@ -4,35 +4,73 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="scripts.js"></script>
-
     <title>ADD USER</title>
 </head>
 
 <body>
 
     <header>
-        <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
+                Boys</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="recruiter.html">
+                            Start
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
 
-            <a class="navbar-brand" href="recruiter.html"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff Boys</a>
-      
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Testy</a>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="testy.html">Testy</a>
+                            <a class="dropdown-item" href="#">Sprawdź test</a>
+                            <a class="dropdown-item" href="#">Wyniki</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown ml-auto">
+
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Kandydaci</a>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="add_user.html">Dodaj kandydata</a>
+                            <a class="dropdown-item" href="delete_user.html">Usuń kandydata</a>
+                        </div>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link active" id="showUser" href="#">
+                            Moje konto
+                        </a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link active" id="signOut" href="#" style='color: orange'>
+                            Wyloguj
+                        </a>
+                    </li>					
+                </ul>
+            </div>
         </nav>
     </header>
 	
 	
-	<div class="add-page">
-			<form>
-				Imię: <input type='text' name='imie' /><br>
-				Nazwisko: <input type='text' name='nazwisko' /><br>
-				Adres: <input type='text' name='adres' /><br>
-				Pesel: <input type='text' name='pesel' /><br>
-				<input type="submit" value='Wyslij' /><br>
-			</form>
+	<div class="login-page">
+	  <div class="form">
+		<form class="login-form" id="registrationFormForCandidate">
+			<p>Below you must only write candidate email to create for her/him account.</p>
+            <input type="email" id="emailInputRegisterCandidate" placeholder="Candidate email" pattern=".*" required>
+            <!-- <input type="password" id="passwordInputRegisterCandidate" placeholder="Password" pattern=".*" required> -->
+            <!-- <input type="password" id="password2InputRegisterCandidate" placeholder="Confirm Password" pattern=".*" required> -->
+			<input type="submit" value="Sign up Candidate" id="button-confirm"> 
+		</form>
+	  </div>
 	</div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -41,7 +79,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <s cript src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/vendor/jquery-3.1.0.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+    <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+    <script src="https://js.arcgis.com/4.3/"></script>
+    <script src="js/config.js"></script>
+	<script src="js/aws-sdk.js"></script>
+	<!-- <script src="js/aws-sdk.min.js"></script> -->
+    <script src="js/cognito-auth.js"></script>
+	<script src="js/recruiter.js"></script>
+	<script src="js/config-candidate.js"></script>
+	<script src="js/cognito-auth-candidate.js"></script>
 
 </body>
 
