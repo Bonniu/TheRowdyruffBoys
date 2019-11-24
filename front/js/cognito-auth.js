@@ -117,7 +117,7 @@ var RowdyruffBoys = window.RowdyruffBoys || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-				alert('Successfully Logged In on ' + email);
+				//alert('Successfully Logged In on ' + email);
                 window.location.href = 'recruiter.html';
             },
             function signinError(err) {

@@ -14,7 +14,7 @@ var data = {
                 alert(err);
                 return;
             }
-            console.log('session validity: ' + session.isValid());
+            console.log('session validity from recruiter.js: ' + session.isValid());
         });
     }
 
@@ -34,7 +34,7 @@ var data = {
 
     $(function onDocReady() {
         $('#signOut').click(function() {
-            RowdyruffBoys.signOut();
+            cognitoUser.signOut();
             alert("You have been signed out.");
 			console.log("You have been signed out.");
             window.location = "signin.html";

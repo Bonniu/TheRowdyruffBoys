@@ -57,6 +57,25 @@ header{
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+#button-warning {
+	border: none; /* <-- This thing here */
+	border:solid 1px #b3b300;
+    border-radius: 20px;
+	font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #e6e600;
+  width: 100%;
+  padding: 15px;
+  color: #000000;
+  font-size: 16px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
 .form button:hover,.form button:active,.form button:focus {
   background: #43A047;
 }
