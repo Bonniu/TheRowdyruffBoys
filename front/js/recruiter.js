@@ -62,6 +62,26 @@ var data = {
             $('#noApiMessage').show();
         }
     });
+	$('#deleteUser').click(function() {
+			var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
+			if(r == true){
+				cognitoUser.deleteUser(function(err, result) {
+					if (err) {
+						alert(err.message || JSON.stringify(err));
+						return;
+					}
+					console.log('call result: ' + result);
+					alert("Your account has been deleted . . . ");
+					console.log("Your account has been deleted . . . .");
+					window.location = "signin.html";
+				});
+				
+			} else {
+				//alert("You canceled deleting your account.");
+				console.log("You canceled deleting your account.");
+			}
+            
+        });
 
     function displayUpdate(text) {
         $('#updates').append($('<li>' + text + '</li>'));
