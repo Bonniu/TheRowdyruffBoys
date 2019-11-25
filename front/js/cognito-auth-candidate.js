@@ -1,6 +1,6 @@
 
 
-var RowdyruffBoys = window.RowdyruffBoys || {};
+var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 
 (function scopeWrapper($) {
     var signinUrl = 'signinAsCandidate.html';
