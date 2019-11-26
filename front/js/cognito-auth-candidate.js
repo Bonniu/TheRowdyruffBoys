@@ -69,6 +69,8 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
             }
         );
     }
+	
+	var cognitoUserForDelete;
 
     function signin(email, password, onSuccess, onFailure) {
         var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
@@ -76,8 +78,8 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
             Password: password
         });
 
-        var cognitoUser = createCognitoUser(email);
-        cognitoUser.authenticateUser(authenticationDetails, {
+        cognitoUserForDelete = createCognitoUser(email);
+        cognitoUserForDelete.authenticateUser(authenticationDetails, {
             onSuccess: onSuccess,
             onFailure: onFailure
         });
@@ -108,6 +110,7 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
         $('#signinFormCandidate').submit(handleSignin);
         $('#registrationFormForCandidate').submit(handleRegister);
         $('#verifyFormCandidate').submit(handleVerify);
+		$('#deleteFormForCandidate').submit(handleSigninDelete);
     });
 
     function handleSignin(event) {
@@ -119,6 +122,41 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
                 console.log('Successfully Logged In');
 				alert('Successfully Logged In on ' + email);
                 window.location.href = 'candidate.html';
+            },
+            function signinError(err) {
+                alert(err);
+            }
+        );
+    }
+	
+	function handleSigninDelete(event) {
+        var email = $('#emailInputDeleteCandidate').val();
+        var password = $('#passwordInputDeleteCandidate').val();
+        event.preventDefault();
+        signin(email, password,
+            function signinSuccess() {
+                console.log('Successfully Authenticate on ' + email);
+				//alert('Successfully Authenticate on ' + email);
+                //window.location.href = 'candidate.html';
+				
+				var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
+				if(r == true){
+					cognitoUserForDelete.deleteUser(function(err, result) {
+						if (err) {
+							alert(err.message || JSON.stringify(err));
+							return;
+						}
+						console.log('call result: ' + result);
+						alert(email + " account has been deleted . . . ");
+						console.log(email + " account has been deleted . . . ");
+						//window.location = "signin.html";
+					});
+					
+				} else {
+					//alert("You canceled deleting your account.");
+					console.log("You canceled deleting " + email + " account.");
+				}
+				
             },
             function signinError(err) {
                 alert(err);

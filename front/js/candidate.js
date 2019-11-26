@@ -33,7 +33,7 @@ var data = {
 
 
     $(function onDocReady() {
-        $('#signOut').click(function() {
+        $('#signOutCandidate').click(function() {
             cognitoUser.signOut();
             alert("You have been signed out.");
 			console.log("You have been signed out.");
