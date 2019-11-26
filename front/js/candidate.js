@@ -14,7 +14,7 @@ var data = {
                 alert(err);
                 return;
             }
-            console.log('session validity from recruiter.js: ' + session.isValid());
+            console.log('session validity from candidate.js: ' + session.isValid());
         });
     }
 

@@ -136,8 +136,6 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Authenticate on ' + email);
-				//alert('Successfully Authenticate on ' + email);
-                //window.location.href = 'candidate.html';
 				
 				var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
 				if(r == true){
@@ -149,11 +147,9 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 						console.log('call result: ' + result);
 						alert(email + " account has been deleted . . . ");
 						console.log(email + " account has been deleted . . . ");
-						//window.location = "signin.html";
 					});
 					
 				} else {
-					//alert("You canceled deleting your account.");
 					console.log("You canceled deleting " + email + " account.");
 				}
 				
@@ -172,6 +168,9 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
         var onSuccess = function registerSuccess(result) {
             var cognitoUser = result.user;
             console.log('user name is ' + cognitoUser.getUsername());
+			
+			//WYSŁANIE MAILA Z PEP AWS na mail kandydata
+			
             var confirmation = ('Registration successful. Please check your email inbox or spam folder for your verification code.');
             if (confirmation) {
                 window.location.href = 'verifyCandidate.html';
@@ -199,7 +198,6 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
                 console.log('Successfully verified');
                 alert('Verification successful. You will now be redirected to the login page.');
                 window.location.href = signinUrl;
-				//możliwe że nie będzie potrebna strona verify tylko od razu LOGIN CANDIDATE wraz ze zmianą hasła
             },
             function verifyError(err) {
                 alert(err);
