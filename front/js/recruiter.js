@@ -82,6 +82,29 @@ var data = {
 			}
             
         });
+	
+	$('#getAllUsers').click(function() {
+			console.log("ShowAllUsers");
+			
+			let url = "https://1mqghaecbc.execute-api.us-east-1.amazonaws.com/testGetAllUsers/getallusers";
+
+			$.ajax({
+				type:"GET",
+				url: url,
+				data: {      
+					'Content-Type': 'application/json',
+					'Authorization': RowdyruffBoys.authToken
+				  },
+				crossDomain: true,
+				success: function (data) {
+				  console.log("received: " + JSON.stringify(data));
+				}});
+				
+			// $.getJSON(url, function(data) {
+				// console.log("received: " + JSON.stringify(data));
+			// });
+				
+			});
 
     function displayUpdate(text) {
         $('#updates').append($('<li>' + text + '</li>'));
