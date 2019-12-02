@@ -8,6 +8,27 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <title>ADD USER</title>
+		<script src="js/vendor/jquery-3.1.0.js"></script>
+	<script src="https://smtpjs.com/v3/smtp.js"></script>  
+	<!-- <script type="text/javascript"> -->
+		<!-- function sendEmail() { -->
+			<!-- var email = $('#email_one').val(); -->
+			<!-- var email_two = $('#email_two').val(); -->
+			<!-- var mailist = [email, email_two]; -->
+			<!-- Email.send({ -->
+				<!-- Host: "smtp.gmail.com", -->
+				<!-- Username : "test.case.test.case.test@gmail.com", -->
+				<!-- Password : "trudneHaslo123!", -->
+				<!-- To : mailist, -->
+				<!-- From : "test.case.test.case.test@gmail.com", -->
+				<!-- Subject : "Hello from AWS Cognito", -->
+				<!-- Body : "Twój email: " + email + " Twoje hasło: ", -->
+			<!-- }) -->
+			<!-- .then(function(message){ -->
+				<!-- alert("mail sent successfully") -->
+			<!-- }); -->
+		<!-- } -->
+	<!-- </script> -->
 </head>
 
 <body>
@@ -64,14 +85,23 @@
 	<div class="login-page">
 	  <div class="form">
 		<form class="login-form" id="registrationFormForCandidate">
-			<p>Below you must only write candidate email to create for her/him account.</p>
+			<p>Below you must fill all gaps to create a candidate account.</p>
+			<p class="message">This is used for sending you an confirmation email with candidate login and password. In the future you will be able to delete this candidate account.</p>
+			<input type="email" id="yourRecruiterMail" placeholder="Your email (recruiter)" pattern=".*" required>
+			<p class="message">Please fill carefully, because all of these information will be used to login candidates.</p>
             <input type="email" id="emailInputRegisterCandidate" placeholder="Candidate email" pattern=".*" required>
-            <!-- <input type="password" id="passwordInputRegisterCandidate" placeholder="Password" pattern=".*" required> -->
-            <!-- <input type="password" id="password2InputRegisterCandidate" placeholder="Confirm Password" pattern=".*" required> -->
+            <input type="password" id="passwordInputRegisterCandidate" placeholder="Password for candidate account" pattern=".*" required>
+            <input type="password" id="password2InputRegisterCandidate" placeholder="Confirm Password" pattern=".*" required>
 			<input type="submit" value="Sign up Candidate" id="button-confirm"> 
 		</form>
 	  </div>
 	</div>
+	
+		<!-- <form> -->
+		<!-- <input type="email" id="email_one" placeholder="Candidate email" pattern=".*" required> -->
+            <!-- <input type="email" id="email_two" placeholder="email recruiter" pattern=".*" required> -->
+			<!-- <input type="button" value="SendEmail" onclick="sendEmail()">  -->
+		<!-- </form> -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -80,7 +110,7 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="js/vendor/jquery-3.1.0.js"></script>
+
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>

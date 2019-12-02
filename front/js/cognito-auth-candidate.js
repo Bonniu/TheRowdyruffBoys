@@ -63,6 +63,7 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
             function signUpCallback(err, result) {
                 if (!err) {
                     onSuccess(result);
+					
                 } else {
                     onFailure(err);
                 }
@@ -162,8 +163,11 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 
     function handleRegister(event) {
         var email = $('#emailInputRegisterCandidate').val();
-        var password = 'trudneHaslo123!'
-        var password2 = 'trudneHaslo123!'
+        var password = $('#passwordInputRegisterCandidate').val();
+        var password2 = $('#password2InputRegisterCandidate').val();
+		var recruiter_email = $('#yourRecruiterMail').val();
+		
+		var list_emails = [email, recruiter_email];
 
         var onSuccess = function registerSuccess(result) {
             var cognitoUser = result.user;
@@ -173,7 +177,14 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 			
             var confirmation = ('Registration successful. Please check your email inbox or spam folder for your verification code.');
             if (confirmation) {
-                window.location.href = 'verifyCandidate.html';
+				function sleep(delay) {
+					var start = new Date().getTime();
+					while (new Date().getTime() < start + delay);
+				}
+				alert("Good job!!! You have just created a new candidate account.");
+				//sleep(3000);
+                //window.location.href = 'verifyCandidate.html';
+				window.location.href = 'recruiter.html';
             }
         };
         var onFailure = function registerFailure(err) {
@@ -183,6 +194,18 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 
         if (password === password2) {
             register(email, password, onSuccess, onFailure);
+			Email.send({
+				Host: "smtp.gmail.com",
+				Username : "test.case.test.case.test@gmail.com",
+				Password : "trudneHaslo123!",
+				To : list_emails,
+				From : "test.case.test.case.test@gmail.com",
+				Subject : "Hello from AWS Cognito - Your login and password.",
+				Body : "Your email: " + email + " Your password: " + password,
+			})
+			.then(function(message){
+				console.log("mail sent successfully to " + list_emails[0] + " & " + list_emails[1] + ".");
+			});
         } else {
             alert('Passwords do not match');
         }
