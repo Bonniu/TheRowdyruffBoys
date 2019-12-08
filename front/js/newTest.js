@@ -34,7 +34,7 @@ creator.saveSurveyFunc = function () {
         },
         'type': 'POST',
         'url': url,
-        'data': JSON.stringify(creator.text),
+        'data': JSON.stringify(JSON.parse(creator.text)),
         'dataType': 'json',
         success: function(resp) { 
             console.log('good');
