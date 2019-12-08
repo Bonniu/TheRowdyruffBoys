@@ -17,14 +17,12 @@ RowdyruffBoys.map = RowdyruffBoys.map || {};
 }(jQuery));
 
 
-let url = "https://ix97tx40of.execute-api.us-east-1.amazonaws.com/insertTest/";
-
+let url = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/insertTest";
+//arn:aws:lambda:us-east-1:994435743906:function:insertTestIntoDB
 var options = {
     showLogicTab: true
 };
 var creator = new SurveyCreator.SurveyCreator("creatorElement", options);
-
-var survey = new Survey.Model(JSON.parse(creator.text));
 
 //Setting this callback will make visible the "Save" button
 creator.saveSurveyFunc = function () {
@@ -32,14 +30,21 @@ creator.saveSurveyFunc = function () {
     type:"POST",
     url: url,
     data: {      
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
-        'Authorization': RowdyruffBoys.authToken
+        'Authorization': RowdyruffBoys.authToken,
+        'input': JSON.parse(creator.text)
       },
     crossDomain: true,
-    success: function (data) {
-      console.log("Good job XD");
-    }});
-}
+    success: function(resp) { 
+        console.log('good');
+    },
+    error: function(resp, err) { 
+        console.log('fail'); 
+        console.log(resp); 
+        console.log(err);
+    }
+})};
 
 creator.text = "{}";
 
