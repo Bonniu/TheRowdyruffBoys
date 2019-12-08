@@ -25,14 +25,6 @@ let json;
 
 let url = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtable";
 
-
-// let headers = {
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': RowdyruffBoys.authToken
-//     }
-// }
-
 $.ajax({
     type:"GET",
     url: url,
