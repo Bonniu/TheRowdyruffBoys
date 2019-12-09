@@ -51,7 +51,7 @@ var data = {
 						//alert('Your account status: ' + result[i].getName() + ' has value ' + result[i].getValue());
 					}
 					if(i == result.length - 1){
-						alert('You are logged in on ' + result[i].getName() + ' which has value ' + result[i].getValue());
+						//alert('You are logged in on ' + result[i].getName() + ' which has value ' + result[i].getValue());
 					}
 				}
 			});
