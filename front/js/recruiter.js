@@ -17,6 +17,31 @@ var data = {
             console.log('session validity from recruiter.js: ' + session.isValid());
         });
     }
+	
+var element_for_email = document.getElementById("userAccountEmail");
+while (element_for_email.firstChild) {
+        element_for_email.removeChild(element_for_email.firstChild);
+    }
+var emailForUser = "";
+cognitoUser.getUserAttributes(function(err, result) {
+				if (err) {
+					//alert(err);
+					return;
+				}
+				for (i = 0; i < result.length; i++) {
+					console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
+					if(i == result.length - 2){
+						//alert('Your account status: ' + result[i].getName() + ' has value ' + result[i].getValue());
+					}
+					if(i == result.length - 1){
+						//alert('You are logged in on ' + result[i].getName() + ' which has value ' + result[i].getValue());
+						emailForUser = "" + result[i].getValue();
+						let newContent = document.createTextNode(emailForUser);
+						element_for_email.append(newContent);
+					}
+				}
+			});
+
 
 (function rideScopeWrapper($) {
     var authToken;
@@ -63,7 +88,7 @@ var data = {
         }
     });
 	$('#deleteUser').click(function() {
-			var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
+			var r = confirm("Do you really want to delete Your actual account? \n This operation is not temporary.");
 			if(r == true){
 				cognitoUser.deleteUser(function(err, result) {
 					if (err) {
@@ -82,6 +107,29 @@ var data = {
 			}
             
         });
+	
+	$('#getAllUsers').click(function() {
+			console.log("ShowAllUsers");
+			
+			let url = "https://1mqghaecbc.execute-api.us-east-1.amazonaws.com/testGetAllUsers/getallusers";
+
+			$.ajax({
+				type:"GET",
+				url: url,
+				data: {      
+					'Content-Type': 'application/json',
+					'Authorization': RowdyruffBoys.authToken
+				  },
+				crossDomain: true,
+				success: function (data) {
+				  console.log("received: " + JSON.stringify(data));
+				}});
+				
+			// $.getJSON(url, function(data) {
+				// console.log("received: " + JSON.stringify(data));
+			// });
+				
+			});
 
     function displayUpdate(text) {
         $('#updates').append($('<li>' + text + '</li>'));

@@ -16,17 +16,34 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
 
             <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
                 Boys</a>
-				<ul class="navbar-nav">
-					<li class="nav-item">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
                         <a class="nav-link active" href="recruiter.html">
                             Start
                         </a>
                     </li>
-				</ul>
+					<li class="nav-item">
+                        <a class="nav-link active" id="showUser" href="#">
+                            My account
+                        </a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link active" id="signOut" href="#" style='color: orange'>
+                            Log out
+                        </a>
+                    </li>							
+                </ul>
+            </div>
         </nav>
     </header>
 
@@ -72,7 +89,8 @@
     <script src="https://js.arcgis.com/4.3/"></script>
     <script src="js/config.js"></script>
     <script src="js/cognito-auth.js"></script>
-    <script src="questionScript.js"></script>
+	<script src="js/recruiter.js"></script>
+    <script src="js/newTest.js"></script>
 
 </body>
 

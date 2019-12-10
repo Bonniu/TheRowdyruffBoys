@@ -8,17 +8,41 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <title>ADD USER</title>
+		<script src="js/vendor/jquery-3.1.0.js"></script>
+	<script src="https://smtpjs.com/v3/smtp.js"></script>  
+	<!-- <script type="text/javascript"> -->
+		<!-- function sendEmail() { -->
+			<!-- var email = $('#email_one').val(); -->
+			<!-- var email_two = $('#email_two').val(); -->
+			<!-- var mailist = [email, email_two]; -->
+			<!-- Email.send({ -->
+				<!-- Host: "smtp.gmail.com", -->
+				<!-- Username : "test.case.test.case.test@gmail.com", -->
+				<!-- Password : "trudneHaslo123!", -->
+				<!-- To : mailist, -->
+				<!-- From : "test.case.test.case.test@gmail.com", -->
+				<!-- Subject : "Hello from AWS Cognito", -->
+				<!-- Body : "Twój email: " + email + " Twoje hasło: ", -->
+			<!-- }) -->
+			<!-- .then(function(message){ -->
+				<!-- alert("mail sent successfully") -->
+			<!-- }); -->
+		<!-- } -->
+	<!-- </script> -->
 </head>
 
 <body>
 
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+
             <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
                 Boys</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -28,33 +52,35 @@
                     </li>
                     <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Testy</a>
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Tests</a>
 
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="testy.html">Testy</a>
-                            <a class="dropdown-item" href="#">Sprawdź test</a>
-                            <a class="dropdown-item" href="#">Wyniki</a>
+                            <a class="dropdown-item" href="testy.html">Show tests</a>
+							<a class="dropdown-item" href="NewTest.html">Create new test</a>
+                            <a class="dropdown-item" href="#">Check tests</a>
+                            <a class="dropdown-item" href="#">Results</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown ml-auto">
 
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Kandydaci</a>
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Candidates</a>
 
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="add_user.html">Dodaj kandydata</a>
-                            <a class="dropdown-item" href="delete_user.html">Usuń kandydata</a>
+                            <a class="dropdown-item" href="add_user.html">Add candidate</a>
+                            <a class="dropdown-item" href="delete_user.html">Remove candidate</a>
+							<!-- <a class="dropdown-item" id="getAllUsers" href="#">Pokaż wszystkich</a> -->
                         </div>
                     </li>
 					<li class="nav-item">
                         <a class="nav-link active" id="showUser" href="#">
-                            Moje konto
+                            My account
                         </a>
                     </li>
 					<li class="nav-item">
                         <a class="nav-link active" id="signOut" href="#" style='color: orange'>
-                            Wyloguj
+                            Log out
                         </a>
-                    </li>					
+                    </li>							
                 </ul>
             </div>
         </nav>
@@ -64,14 +90,23 @@
 	<div class="login-page">
 	  <div class="form">
 		<form class="login-form" id="registrationFormForCandidate">
-			<p>Below you must only write candidate email to create for her/him account.</p>
+			<p>Below you must fill all gaps to create a candidate account.</p>
+			<p class="message">This is used for sending you an confirmation email with candidate login and password. In the future you will be able to delete this candidate account.</p>
+			<input type="email" id="yourRecruiterMail" placeholder="Your email (recruiter)" pattern=".*" required>
+			<p class="message">Please fill carefully, because all of these information will be used to login candidates.</p>
             <input type="email" id="emailInputRegisterCandidate" placeholder="Candidate email" pattern=".*" required>
-            <!-- <input type="password" id="passwordInputRegisterCandidate" placeholder="Password" pattern=".*" required> -->
-            <!-- <input type="password" id="password2InputRegisterCandidate" placeholder="Confirm Password" pattern=".*" required> -->
+            <input type="password" id="passwordInputRegisterCandidate" placeholder="Password for candidate account" pattern=".*" required>
+            <input type="password" id="password2InputRegisterCandidate" placeholder="Confirm Password" pattern=".*" required>
 			<input type="submit" value="Sign up Candidate" id="button-confirm"> 
 		</form>
 	  </div>
 	</div>
+	
+		<!-- <form> -->
+		<!-- <input type="email" id="email_one" placeholder="Candidate email" pattern=".*" required> -->
+            <!-- <input type="email" id="email_two" placeholder="email recruiter" pattern=".*" required> -->
+			<!-- <input type="button" value="SendEmail" onclick="sendEmail()">  -->
+		<!-- </form> -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -80,7 +115,7 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="js/vendor/jquery-3.1.0.js"></script>
+
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>

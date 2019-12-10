@@ -63,6 +63,7 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
             function signUpCallback(err, result) {
                 if (!err) {
                     onSuccess(result);
+					
                 } else {
                     onFailure(err);
                 }
@@ -136,8 +137,6 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Authenticate on ' + email);
-				//alert('Successfully Authenticate on ' + email);
-                //window.location.href = 'candidate.html';
 				
 				var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
 				if(r == true){
@@ -149,11 +148,9 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 						console.log('call result: ' + result);
 						alert(email + " account has been deleted . . . ");
 						console.log(email + " account has been deleted . . . ");
-						//window.location = "signin.html";
 					});
 					
 				} else {
-					//alert("You canceled deleting your account.");
 					console.log("You canceled deleting " + email + " account.");
 				}
 				
@@ -166,15 +163,28 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 
     function handleRegister(event) {
         var email = $('#emailInputRegisterCandidate').val();
-        var password = 'trudneHaslo123!'
-        var password2 = 'trudneHaslo123!'
+        var password = $('#passwordInputRegisterCandidate').val();
+        var password2 = $('#password2InputRegisterCandidate').val();
+		var recruiter_email = $('#yourRecruiterMail').val();
+		
+		var list_emails = [email, recruiter_email];
 
         var onSuccess = function registerSuccess(result) {
             var cognitoUser = result.user;
             console.log('user name is ' + cognitoUser.getUsername());
+			
+			//WYSŁANIE MAILA Z PEP AWS na mail kandydata
+			
             var confirmation = ('Registration successful. Please check your email inbox or spam folder for your verification code.');
             if (confirmation) {
-                window.location.href = 'verifyCandidate.html';
+				function sleep(delay) {
+					var start = new Date().getTime();
+					while (new Date().getTime() < start + delay);
+				}
+				alert("Good job!!! You have just created a new candidate account.");
+				//sleep(3000);
+                //window.location.href = 'verifyCandidate.html';
+				window.location.href = 'recruiter.html';
             }
         };
         var onFailure = function registerFailure(err) {
@@ -184,6 +194,18 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 
         if (password === password2) {
             register(email, password, onSuccess, onFailure);
+			Email.send({
+				Host: "smtp.gmail.com",
+				Username : "test.case.test.case.test@gmail.com",
+				Password : "trudneHaslo123!",
+				To : list_emails,
+				From : "test.case.test.case.test@gmail.com",
+				Subject : "Hello from AWS Cognito - Your login and password.",
+				Body : "Your email: " + email + " Your password: " + password,
+			})
+			.then(function(message){
+				console.log("mail sent successfully to " + list_emails[0] + " & " + list_emails[1] + ".");
+			});
         } else {
             alert('Passwords do not match');
         }
@@ -199,7 +221,6 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
                 console.log('Successfully verified');
                 alert('Verification successful. You will now be redirected to the login page.');
                 window.location.href = signinUrl;
-				//możliwe że nie będzie potrebna strona verify tylko od razu LOGIN CANDIDATE wraz ze zmianą hasła
             },
             function verifyError(err) {
                 alert(err);
