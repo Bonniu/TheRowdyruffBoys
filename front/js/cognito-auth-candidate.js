@@ -64,6 +64,8 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
                 if (!err) {
                     onSuccess(result);
 					
+					
+					
                 } else {
                     onFailure(err);
                 }
@@ -206,6 +208,31 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 			.then(function(message){
 				console.log("mail sent successfully to " + list_emails[0] + " & " + list_emails[1] + ".");
 			});
+			
+			console.log("creating user to DynamoDB by AJAX");
+			
+					let url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/users";
+					var text = '{ "userEmail":"' + email + '", "test_id":"empty", "test_check":"empty" }'; 
+					$.ajax({
+						headers: { 
+							'Authorization': RowdyruffBoys.authToken,
+							'Accept': 'application/json',
+							'Content-Type': 'application/json' 					
+						},
+						'type': 'POST',
+						'url': url,
+						'data': text,
+						'dataType': 'json',
+						crossDomain: true,
+						success: function(resp) { 
+							console.log('good --> successfuly added user to DynamoDB');
+						},
+						error: function(resp, err) { 
+							console.log('fail'); 
+							console.log(resp); 
+							console.log(err);
+						}
+						});
         } else {
             alert('Passwords do not match');
         }
