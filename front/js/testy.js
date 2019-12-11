@@ -3,7 +3,10 @@
 var RowdyruffBoys = window.RowdyruffBoys || {};
 RowdyruffBoys.map = RowdyruffBoys.map || {};
 
-let json;
+
+var url_string = this.window.location.href
+var url = new URL(url_string);
+let ID = url.searchParams.get("a");
 
 (function checkIfSignedIn($) {
     var authToken;
@@ -19,43 +22,35 @@ let json;
     });
 
 
-
-
 }(jQuery));
 
-let url = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtable";
-
 $.ajax({
-    type:"GET",
-    url: url,
-    data: {      
+    type: "GET",
+    url: "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtable",
+    data: {
         'Content-Type': 'application/json',
         'Authorization': RowdyruffBoys.authToken,
-        'test_id': 3
-      },
+        'test_id': ID
+    },
     crossDomain: true,
     success: function (data) {
-      console.log("received: " + JSON.stringify(data));
-      var survey = new Survey.Model(JSON.parse(data));
+        console.log("received: " + JSON.stringify(data));
+        var survey = new Survey.Model(JSON.parse(data));
 
-      survey
-          .onComplete
-          .add(function (result) {
-              document
-                  .querySelector('#survey')
-                  .innerHTML = "result: " + JSON.stringify(result.data);
-          });
+        survey
+            .onComplete
+            .add(function (result) {
+                document
+                    .querySelector('#survey')
+                    .innerHTML = "result: " + JSON.stringify(result.data);
+            });
 
-      $("#surveyContainer").Survey({model: survey});
+        $("#surveyContainer").Survey({ model: survey });
 
-    }});
-
-
-
-jQuery(document).ready(function ($) {
-    $(".clickable-row").click(function () {
-        window.location = $(this).data("href");
-    });
+    }
 });
+
+
+
 
 
