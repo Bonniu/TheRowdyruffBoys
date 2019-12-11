@@ -17,6 +17,9 @@ var data = {
             console.log('session validity from recruiter.js: ' + session.isValid());
         });
     }
+	
+
+
 
 (function rideScopeWrapper($) {
     var authToken;
@@ -63,7 +66,7 @@ var data = {
         }
     });
 	$('#deleteUser').click(function() {
-			var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
+			var r = confirm("Do you really want to delete Your actual account? \n This operation is not temporary.");
 			if(r == true){
 				cognitoUser.deleteUser(function(err, result) {
 					if (err) {
@@ -104,6 +107,35 @@ var data = {
 				// console.log("received: " + JSON.stringify(data));
 			// });
 				
+			});
+			
+	$('#createAJAX').click(function() {
+			console.log("creating user to DynamoDB by AJAX");
+			
+			let url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/users";
+			
+			var text = '{ "userEmail":"John1@gmail.com" , "test_id":"empty", "test_check":"empty" }'; 
+
+			$.ajax({
+				headers: { 
+					'Authorization': RowdyruffBoys.authToken,
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 					
+				},
+				'type': 'POST',
+				'url': url,
+				'data': text,
+				'dataType': 'json',
+				crossDomain: true,
+				success: function(resp) { 
+					console.log('good --> successfuly added user to DynamoDB');
+				},
+				error: function(resp, err) { 
+					console.log('fail'); 
+					console.log(resp); 
+					console.log(err);
+				}
+				});				
 			});
 
     function displayUpdate(text) {

@@ -16,11 +16,23 @@
 <body>
     <header id="navbar">
         <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
 
+<<<<<<< HEAD:front/tests.html
             <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt="">
                 Rowdyruff Boys</a>
 
             <div class="collapse navbar-collapse">
+=======
+            <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
+                Boys</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+>>>>>>> be1e4a2363cf92a5dbea561742dd77fc08cb480a:front/testy.html
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="recruiter.html">
@@ -31,26 +43,46 @@
                         <a class="nav-link" href="NewTest.html">
                             Dodaj test
                         </a>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Tests</a>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="testy.html">Show tests</a>
+							<a class="dropdown-item" href="NewTest.html">Create new test</a>
+                            <a class="dropdown-item" href="#">Check tests</a>
+                            <a class="dropdown-item" href="#">Results</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown ml-auto">
 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Kandydaci</a>
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Candidates</a>
 
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="add_user.html">Dodaj kandydata</a>
                             <a class="dropdown-item" href="delete_user.html">Usuń kandydata</a>
+                            <a class="dropdown-item" href="add_user.html">Add candidate</a>
+                            <a class="dropdown-item" href="delete_user.html">Remove candidate</a>
+							<!-- <a class="dropdown-item" id="getAllUsers" href="#">Pokaż wszystkich</a> -->
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" id="showUser" href="#">
                             Moje konto
+                            My account
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" id="signOut" href="#" style='color: orange'>
                             Wyloguj
+                            Log out
                         </a>
+<<<<<<< HEAD:front/tests.html
                     </li>
+=======
+                    </li>							
+>>>>>>> be1e4a2363cf92a5dbea561742dd77fc08cb480a:front/testy.html
                 </ul>
             </div>
         </nav>
