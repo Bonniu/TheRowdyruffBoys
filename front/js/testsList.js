@@ -30,30 +30,32 @@ $.ajax({
     success: function (data) {
 
         console.log("received: " + JSON.stringify(data));
-        data = data.replace('[','');
-        data = data.replace(']','');
+        data = data.replace('[', '');
+        data = data.replace(']', '');
         data = data.replace(/\s/g, '');
-
-        console.log("received: " + data);
 
         testsList = data.split(',');
 
         let table = $("#IDs").find("tbody");
 
-        for (let test of testsList) {
-            table.append(
-                "<tr>" +
-                "<td>" + test + "</td>" +
-                "<td>" + "<button onclick='editTest(" + test + ")'>Edit</button>" + "</td>" +
-                "</tr>"
-            );
+        for (let i of testsList) {
+            console.log(typeof (i));
         }
+
+for (let test of testsList) {
+    table.append(
+        "<tr>" +
+        "<td>" + test + "</td>" +
+        "<td>" + "<button onclick='editTest(" + test + ")'>Edit</button>" + "</td>" +
+        "</tr>"
+    );
+}
     }
 });
 
 function editTest(test) {
-    window.location = 'example_test.html?a='+test;
-  }
+    window.location = 'example_test.html?a=' + test;
+}
 
 
 
