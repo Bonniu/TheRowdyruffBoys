@@ -109,33 +109,31 @@ var data = {
 				
 			});
 			
-	$('#createAJAX').click(function() {
-			console.log("creating user to DynamoDB by AJAX");
+	$('#createAJAX').click(function() {			
+			console.log("Deleting user from DynamoDB by AJAX");
 			
-			let url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/users";
-			
-			var text = '{ "userEmail":"John1@gmail.com" , "test_id":"empty", "test_check":"empty" }'; 
-
-			$.ajax({
-				headers: { 
-					'Authorization': RowdyruffBoys.authToken,
-					'Accept': 'application/json',
-					'Content-Type': 'application/json' 					
-				},
-				'type': 'POST',
-				'url': url,
-				'data': text,
-				'dataType': 'json',
-				crossDomain: true,
-				success: function(resp) { 
-					console.log('good --> successfuly added user to DynamoDB');
-				},
-				error: function(resp, err) { 
-					console.log('fail'); 
-					console.log(resp); 
-					console.log(err);
-				}
-				});				
+						let url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/users";
+						var text = '{ "userEmail":"kakuncio@gmail.com" }'; 
+						$.ajax({
+							headers: { 
+								'Authorization': RowdyruffBoys.authToken,
+								'Accept': 'application/json',
+								'Content-Type': 'application/json' 					
+							},
+							'type': 'DELETE',
+							'url': url,
+							'data': text,
+							'dataType': 'json',
+							crossDomain: true,
+							success: function(resp) { 
+								console.log('good --> successfuly deleted user from DynamoDB');
+							},
+							error: function(resp, err) { 
+								console.log('fail deleteUser DynamoDB'); 
+								console.log(resp); 
+								console.log(err);
+							}
+							});			
 			});
 
     function displayUpdate(text) {
