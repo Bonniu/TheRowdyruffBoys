@@ -18,29 +18,7 @@ var data = {
         });
     }
 	
-var element_for_email = document.getElementById("userAccountEmail");
-while (element_for_email.firstChild) {
-        element_for_email.removeChild(element_for_email.firstChild);
-    }
-var emailForUser = "";
-cognitoUser.getUserAttributes(function(err, result) {
-				if (err) {
-					//alert(err);
-					return;
-				}
-				for (i = 0; i < result.length; i++) {
-					console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-					if(i == result.length - 2){
-						//alert('Your account status: ' + result[i].getName() + ' has value ' + result[i].getValue());
-					}
-					if(i == result.length - 1){
-						//alert('You are logged in on ' + result[i].getName() + ' which has value ' + result[i].getValue());
-						emailForUser = "" + result[i].getValue();
-						let newContent = document.createTextNode(emailForUser);
-						element_for_email.append(newContent);
-					}
-				}
-			});
+
 
 
 (function rideScopeWrapper($) {
@@ -129,6 +107,33 @@ cognitoUser.getUserAttributes(function(err, result) {
 				// console.log("received: " + JSON.stringify(data));
 			// });
 				
+			});
+			
+	$('#createAJAX').click(function() {			
+			console.log("Deleting user from DynamoDB by AJAX");
+			
+						let url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/users";
+						var text = '{ "userEmail":"kakuncio@gmail.com" }'; 
+						$.ajax({
+							headers: { 
+								'Authorization': RowdyruffBoys.authToken,
+								'Accept': 'application/json',
+								'Content-Type': 'application/json' 					
+							},
+							'type': 'DELETE',
+							'url': url,
+							'data': text,
+							'dataType': 'json',
+							crossDomain: true,
+							success: function(resp) { 
+								console.log('good --> successfuly deleted user from DynamoDB');
+							},
+							error: function(resp, err) { 
+								console.log('fail deleteUser DynamoDB'); 
+								console.log(resp); 
+								console.log(err);
+							}
+							});			
 			});
 
     function displayUpdate(text) {

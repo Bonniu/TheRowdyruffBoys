@@ -1,12 +1,5 @@
-
-
 var RowdyruffBoys = window.RowdyruffBoys || {};
 RowdyruffBoys.map = RowdyruffBoys.map || {};
-
-
-var url_string = this.window.location.href
-var url = new URL(url_string);
-let ID = url.searchParams.get("a");
 
 (function checkIfSignedIn($) {
     var authToken;
@@ -20,35 +13,50 @@ let ID = url.searchParams.get("a");
         alert(error);
         window.location.href = '/signin.html';
     });
-
-
 }(jQuery));
+
+let url = "https://oivvvj5ut8.execute-api.us-east-1.amazonaws.com/getTestsID/";
+
+var testsList = [];
 
 $.ajax({
     type: "GET",
-    url: "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtable",
+    url: url,
     data: {
         'Content-Type': 'application/json',
         'Authorization': RowdyruffBoys.authToken,
-        'test_id': ID
     },
     crossDomain: true,
     success: function (data) {
+
         console.log("received: " + JSON.stringify(data));
-        var survey = new Survey.Model(JSON.parse(data));
+        data = data.replace('[', '');
+        data = data.replace(']', '');
+        data = data.replace(/\s/g, '');
 
-        survey
-            .onComplete
-            .add(function (result) {
-                document
-                    .querySelector('#survey')
-                    .innerHTML = "result: " + JSON.stringify(result.data);
-            });
+        testsList = data.split(',');
 
-        $("#surveyContainer").Survey({ model: survey });
+        let table = $("#IDs").find("tbody");
 
+        for (let i of testsList) {
+            console.log(typeof (i));
+        }
+
+for (let test of testsList) {
+    table.append(
+        "<tr>" +
+        "<td>" + test + "</td>" +
+        "<td>" + "<button onclick='editTest(" + test + ")'>Edit</button>" + "</td>" +
+        "</tr>"
+    );
+}
     }
 });
+
+function editTest(test) {
+    window.location = 'example_test.html?a=' + test;
+}
+
 
 
 

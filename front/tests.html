@@ -15,6 +15,7 @@
 
 <body>
     <header id="navbar">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md" class="d-inline-block mx-1 align-bottom">
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
 
             <a class="navbar-brand" href="#"><img src="img/Rowdyruff_Boys.jpg" width="30" height="30" alt=""> Rowdyruff
@@ -31,6 +32,10 @@
                             Start
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="NewTest.html">
+                            Add test
+                        </a>
                     <li class="nav-item dropdown">
 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Tests</a>
@@ -43,21 +48,19 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown ml-auto">
-
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">Candidates</a>
 
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="add_user.html">Add candidate</a>
                             <a class="dropdown-item" href="delete_user.html">Remove candidate</a>
-							<!-- <a class="dropdown-item" id="getAllUsers" href="#">Pokaż wszystkich</a> -->
                         </div>
                     </li>
-					<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link active" id="showUser" href="#">
                             My account
                         </a>
                     </li>
-					<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link active" id="signOut" href="#" style='color: orange'>
                             Log out
                         </a>
@@ -70,21 +73,14 @@
     <div class="container-fluid">
         <div class="raw ">
             <div class="content">
-                <table class="table table-dark table-hover">
+                <table id="IDs" class="table table-dark ">
                     <thead>
                         <tr>
-                            <th>Test ID</th>
-                            <th>Date</th>
-                            <th>Topic</th>
+                            <th>Tests ID's</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class='clickable-row' data-href='example_test.html'>
-                            <td>3</td>
-                            <td>13-11-2019</td>
-                            <td>Java Script</td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
+                </table>
                 </table>
             </div>
         </div>
@@ -105,17 +101,17 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="js/vendor/jquery-3.1.0.js"></script>
+    <script src="js/vendor/jquery-3.1.0.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>
     <script src="https://js.arcgis.com/4.3/"></script>
     <script src="js/config.js"></script>
-	<script src="js/aws-sdk.js"></script>
-	<!-- <script src="js/aws-sdk.min.js"></script> -->
+    <script src="js/aws-sdk.js"></script>
+    <!-- <script src="js/aws-sdk.min.js"></script> -->
     <script src="js/cognito-auth.js"></script>
-	<script src="js/recruiter.js"></script>
-	<script src="js/testy.js"></script>
+    <script src="js/recruiter.js"></script>
+    <script src="js/testsList.js"></script>
 
 </body>
 
