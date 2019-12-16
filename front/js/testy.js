@@ -34,7 +34,7 @@ $.ajax({
     },
     crossDomain: true,
     success: function (data) {
-        console.log("received: " + JSON.stringify(data));
+        console.log("received2: " + JSON.stringify(data));
         var survey = new Survey.Model(JSON.parse(data));
 
         survey
@@ -49,7 +49,6 @@ $.ajax({
 
     }
 });
-
 
 
 
