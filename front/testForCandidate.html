@@ -50,6 +50,10 @@
             </div>
         </nav>
     </header>
+	
+	<div id="testID"> 
+		
+	</div>
 
     <div class="container-fluid">
         <div class="raw">
@@ -78,6 +82,8 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
+	<script src="js/vendor/jquery-3.1.0.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
 	<script src="scripts.js"></script>
 	
 	    <script src="js/vendor/aws-cognito-sdk.min.js"></script>
@@ -87,6 +93,65 @@
 	<script src="js/config-candidate.js"></script>
 	<script src="js/cognito-auth-candidate.js"></script>
 	<script src="js/candidate.js"></script>
+	<script>
+		var email = '';
+		cognitoUser.getUserAttributes(function(err, result) {
+			if (err) {
+				alert(err);
+				return;
+			}
+			for (i = 0; i < result.length; i++) {
+				//console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
+				if(i == result.length - 2){
+					//alert('Your account status: ' + result[i].getName() + ' has value ' + result[i].getValue());
+				}
+				if(i == result.length - 1){
+					//alert('You are logged in on ' + result[i].getName() + ' which has value ' + result[i].getValue());
+					email = result[i].getValue();
+					sendPOSTToGetID(email);
+				}
+			}
+		});
+
+		function sendPOSTToGetID(email) {
+			let url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/gettestid";
+			console.log("Get test ID for " + email);
+			var text = '{ "userEmail":"' + email + '"}'; 
+			$.ajax({
+				headers: { 
+					'Authorization': RowdyruffBoys.authToken,
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 					
+				},
+				'type': 'POST',
+				'url': url,
+				'data': text,
+				'dataType': 'json',
+				crossDomain: true,
+				success: function(resp) { 
+					console.log('good --> successfuly get user test ID from DynamoDB');
+					console.log(resp);
+					let element = document.getElementById("testID");
+					let new_p = document.createElement("p");
+					if(resp === "empty") {
+						let new_text = document.createTextNode("There is no test for " + email);
+						new_p.appendChild(new_text);
+						element.appendChild(new_p);	
+					} else {
+						let new_text = document.createTextNode("TEST ID for " + email + ": " + resp);
+						new_p.appendChild(new_text);
+						element.appendChild(new_p);	
+					}
+									
+				},
+				error: function(resp, err) { 
+					console.log('Fail during geting user test ID from DynamoDB'); 
+					console.log(resp); 
+					console.log(err);
+				}
+				});
+		}
+	</script>
 
 </body>
 
