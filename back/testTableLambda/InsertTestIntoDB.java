@@ -17,7 +17,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-public class insertTestIntoDatabase implements RequestHandler<Object, String> {
+public class InsertTestIntoDB implements RequestHandler<Object, String> {
 
 	AmazonDynamoDB ddb = AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
 	DynamoDB dynamoDB = new DynamoDB(ddb);
@@ -56,7 +56,7 @@ public class insertTestIntoDatabase implements RequestHandler<Object, String> {
 			questionId.put("S", idList.get(i));
 			ids.put(questionId);
 		}	
-		testMap.put("test_id", new AttributeValue(context.getAwsRequestId()));
+		testMap.put("test_id", new AttributeValue(context.getAwsRequestId().substring(0, 13)));
 		testMap.put("questions_id", new AttributeValue(ids.toString()));
 		ddb.putItem("testTable", testMap);
 		return "Put Test with ids: " + idList.toString();
@@ -64,7 +64,6 @@ public class insertTestIntoDatabase implements RequestHandler<Object, String> {
 
 	public HashMap<String, Object> parseOpenQuestion(JSONObject questionJSON) {
 		String questionStr = questionJSON.getString("title");
-		System.out.println("Open question: " + questionStr + '\n');
 		HashMap<String, Object> question = new HashMap<String, Object>();
 		question.put("question", questionStr);
 		question.put("max_pts", 2); // tutaj dodac potem -------------------------
@@ -93,7 +92,6 @@ public class insertTestIntoDatabase implements RequestHandler<Object, String> {
 			if (answerList.get(i).equals(correctAnswer))
 				closedQuestion.put("answer", getStringFromInt(i));
 		}
-		System.out.println("Closed question: " + closedQuestion + '\n');
 		return closedQuestion;
 	}
 
@@ -111,7 +109,7 @@ public class insertTestIntoDatabase implements RequestHandler<Object, String> {
 	}
 
 	public String addOpenQuestionToDatabase(HashMap<String, Object> oQuestion, Context context, int i) {
-		String questionId = Integer.toString(i) + context.getAwsRequestId().substring(1);
+		String questionId = Integer.toString(i) + context.getAwsRequestId().substring(1, 13);
 		HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 		item_values.put("oq_id", new AttributeValue(questionId));
 		item_values.put("max_pts", new AttributeValue(oQuestion.get("max_pts").toString()));
@@ -123,7 +121,7 @@ public class insertTestIntoDatabase implements RequestHandler<Object, String> {
 	}
 
 	public String addClosedQuestionToDatabase(HashMap<String, String> cQuestion, Context context, int i) {
-		String questionId = Integer.toString(i) + context.getAwsRequestId().substring(1);
+		String questionId = Integer.toString(i) + context.getAwsRequestId().substring(1, 13);
 		HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 		item_values.put("cq_id", new AttributeValue(questionId));
 		item_values.put("a", new AttributeValue(cQuestion.get("a")));
