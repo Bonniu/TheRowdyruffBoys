@@ -23,7 +23,6 @@ public class getQuestionsFromTest implements RequestHandler<Object, String> {
 	Table closedQuestions = dynamoDB.getTable("closedQuestions");
 	Table openQuestions = dynamoDB.getTable("openQuestions");
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public String handleRequest(Object input, Context context) {
 
@@ -85,7 +84,7 @@ public class getQuestionsFromTest implements RequestHandler<Object, String> {
 		JSONObject d = new JSONObject("{\"value\": \"item4\", \"text\": \"" + question.getString("d") + "\"}");
 		JSONArray choices = new JSONArray();
 		choices.put(a).put(b).put(c).put(d);
-		closedQuestion.put("type", "checkbox");
+		closedQuestion.put("type", "radiogroup");
 		closedQuestion.put("name", "Question " + Integer.toString(index + 1));
 		closedQuestion.put("title", question.getString("question"));
 		closedQuestion.put("choices", choices);
