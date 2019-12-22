@@ -56,7 +56,7 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 			questionId.put("S", idList.get(i));
 			ids.put(questionId);
 		}	
-		testMap.put("test_id", new AttributeValue(context.getAwsRequestId().substring(0, 13)));
+		testMap.put("test_id", new AttributeValue(replaceLetters(context.getAwsRequestId().substring(0, 10))));
 		testMap.put("questions_id", new AttributeValue(ids.toString()));
 		ddb.putItem("testTable", testMap);
 		return "Put Test with ids: " + idList.toString();
@@ -109,7 +109,7 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 	}
 
 	public String addOpenQuestionToDatabase(HashMap<String, Object> oQuestion, Context context, int i) {
-		String questionId = Integer.toString(i) + context.getAwsRequestId().substring(1, 13);
+		String questionId = Integer.toString(i) + replaceLetters(context.getAwsRequestId().substring(1, 9));
 		HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 		item_values.put("oq_id", new AttributeValue(questionId));
 		item_values.put("max_pts", new AttributeValue(oQuestion.get("max_pts").toString()));
@@ -121,7 +121,7 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 	}
 
 	public String addClosedQuestionToDatabase(HashMap<String, String> cQuestion, Context context, int i) {
-		String questionId = Integer.toString(i) + context.getAwsRequestId().substring(1, 13);
+		String questionId = Integer.toString(i) + replaceLetters(context.getAwsRequestId().substring(1, 9));
 		HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 		item_values.put("cq_id", new AttributeValue(questionId));
 		item_values.put("a", new AttributeValue(cQuestion.get("a")));
@@ -134,6 +134,15 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 		System.out.println("closed: Put item" + item_values.toString());
 		return questionId;
 
+	}
+	
+	public String replaceLetters(String input) {
+		String result = input;
+		result = result.replace("a", "1").replace("b", "2").replace("c", "3")
+				.replace("d", "4").replace("e", "5").replace("f", "6").replace("-", "0");
+		System.out.println(input);
+		System.out.println(result);
+		return result;
 	}
 
 }
