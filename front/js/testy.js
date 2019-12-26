@@ -24,6 +24,11 @@ let ID = url.searchParams.get("a");
 
 }(jQuery));
 
+var options = {
+    showLogicTab: true
+};
+var creator = new SurveyCreator.SurveyCreator("survey", options);
+
 $.ajax({
     type: "GET",
     url: "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtable",
@@ -35,21 +40,33 @@ $.ajax({
     crossDomain: true,
     success: function (data) {
         console.log("received2: " + JSON.stringify(data));
-        var survey = new Survey.Model(JSON.parse(data));
 
-        survey
-            .onComplete
-            .add(function (result) {
-                document
-                    .querySelector('#survey')
-                    .innerHTML = "result: " + JSON.stringify(result.data);
-            });
-
-        $("#surveyContainer").Survey({ model: survey });
-
+        creator.text = data;
     }
 });
 
+
+creator.saveSurveyFunc = function () {
+    $.ajax({
+        headers: { 
+            'Authorization': RowdyruffBoys.authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+        },
+        'type': 'POST',
+        'url': url,
+        'data': JSON.stringify(JSON.parse(creator.text)),
+        'dataType': 'json',
+        success: function(resp) { 
+            console.log('good');
+        },
+        error: function(resp, err) { 
+            console.log('fail'); 
+            console.log(resp); 
+            console.log(err);
+        }
+        });
+};
 
 
 
