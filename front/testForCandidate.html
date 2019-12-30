@@ -48,6 +48,11 @@
 							Log out
 						</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link active" id="getSynonym" href="#" style='color: blue'>
+							Find synonym
+						</a>
+					</li>
 
 				</ul>
 
@@ -182,6 +187,40 @@
 				}
 			});
 		}
+		
+		$(function onDocReady() {
+			$('#getSynonym').click(function() {
+				var selObj = window.getSelection(); 
+				<!-- alert(selObj); -->
+				let text = selObj.toString();
+				let url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=en-en&text=";
+				url = url + text;
+				
+				$.ajax({url: url, success: function(result){
+					console.log(result);
+					var json = result;
+					if(json.def[0] == null || json.def[0].tr[0].syn == null){
+						alert("There is no synonym for: " + text);
+					} else {
+						let synonyms = "";
+						for (i = 0; i < json.def[0].tr[0].syn.length; i++) {
+							if(i != json.def[0].tr[0].syn.length - 1) {
+								synonyms += json.def[0].tr[0].syn[i].text + ", ";
+							} else {
+								synonyms += json.def[0].tr[0].syn[i].text + ".";
+							}
+							
+						} 
+						if(json.def[0].tr[0].syn.length > 1) {
+							alert("Synonyms for word " + text + " are: " + synonyms);
+						} else {
+							alert("Synonym for word " + text + " is: " + synonyms);
+						}
+					}
+				  }});
+				
+			});
+		});
 	</script>
 
 </body>
