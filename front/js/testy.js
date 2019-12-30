@@ -40,6 +40,7 @@ $.ajax({
     crossDomain: true,
     success: function (data) {
         console.log("received2: " + JSON.stringify(data));
+        console.log(ID);
 
         creator.text = data;
     }
@@ -47,14 +48,19 @@ $.ajax({
 
 
 creator.saveSurveyFunc = function () {
-    $.ajax({
+	console.log('save w edit');
+
+	//add
+	let url2 = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/";
+	$.ajax({
+		
         headers: { 
             'Authorization': RowdyruffBoys.authToken,
             'Accept': 'application/json',
             'Content-Type': 'application/json' 
         },
         'type': 'POST',
-        'url': url,
+        'url': url2,
         'data': JSON.stringify(JSON.parse(creator.text)),
         'dataType': 'json',
         success: function(resp) { 
@@ -65,7 +71,30 @@ creator.saveSurveyFunc = function () {
             console.log(resp); 
             console.log(err);
         }
-        });
+	});
+	console.log('po add');
+	
+	//delete
+    url2 = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtableremove";
+    $.ajax({
+        type: 'GET',
+		data: {
+			'Content-Type': 'application/json',
+			'Authorization': RowdyruffBoys.authToken,
+			'test_id': ID
+		},
+        'url': url2,
+        success: function(resp) { 
+            console.log('remove');
+			console.log(ID);
+        },
+        error: function(resp, err) { 
+            console.log('fail'); 
+            console.log(resp); 
+            console.log(err);
+        }
+	});
+	console.log('po delete');
 };
 
 
