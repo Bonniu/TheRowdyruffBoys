@@ -110,6 +110,7 @@
 	<script src="js/cognito-auth-candidate.js"></script>
 	<script src="js/candidate.js"></script>
 	<script>
+		var jsonTest = '';
 		var email = '';
 		cognitoUser.getUserAttributes(function (err, result) {
 			if (err) {
@@ -156,6 +157,7 @@
 				}
 			});
 		}
+		
 
 		function getTestForCandidate(id) {
 
@@ -175,6 +177,13 @@
 						.onComplete
 						.add(function (result) {
 							console.log(JSON.stringify(result.data, null, 3));
+							
+							jsonTest = JSON.stringify(result.data, null, 3);
+							jsonTest = JSON.stringify(jsonTest);
+							sendSolvedTest(id);
+							
+							
+							
 						});
 
 					$("#surveyContainer").Survey({ model: survey });
@@ -186,7 +195,36 @@
 					console.log(err);
 				}
 			});
+			
+			
 		}
+		
+
+		function sendSolvedTest(id){			
+						url = "https://54pvtn3r3g.execute-api.us-east-1.amazonaws.com/witamUser/sendsolvedtest";
+						var text = '{ "userEmail":"' + email + '", "test_id":"' + id + '", "test_check":"empty", "solvedTest":'+jsonTest+'}';  
+						
+						$.ajax({
+							headers: { 
+								'Authorization': RowdyruffBoys.authToken,
+								'Accept': 'application/json',
+								'Content-Type': 'application/json' 					
+							},
+							'type': 'POST',
+							'url': url,
+							'data': text,
+							'dataType': 'json',
+							crossDomain: true,
+							success: function(resp) { 
+							console.log('good --> successfuly sendSolvedTest to DynamoDB');
+							},
+							error: function(resp, err) { 
+								console.log('fail sendSolvedTest to DynamoDB');  
+								console.log(resp); 
+								console.log(err);
+							}
+							});		
+			}
 		
 		$(function onDocReady() {
 			$('#getSynonym').click(function() {
@@ -224,5 +262,4 @@
 	</script>
 
 </body>
-
 </html>
