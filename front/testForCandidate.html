@@ -79,6 +79,10 @@
 				</div>
 			</div>
 		</div>
+		
+		<div>
+			<p id="noTest"></p>
+		</div>
 
 		<div class="raw">
 			<div class="footer">
@@ -147,7 +151,16 @@
 				success: function (resp) {
 					console.log('good --> successfuly get user test ID from DynamoDB');
 					console.log(resp);
-					getTestForCandidate(resp);
+					if(resp != "empty") {
+						getTestForCandidate(resp);
+					} else {
+						let text_ = $('#noTest').get(0);
+						let newBR = $('<br>').get(0);
+						let newContent0 = document.createTextNode("No test for you.");
+						text_.append(newBR);
+						text_.append(newContent0);
+					}
+					
 				},
 				error: function (resp, err) {
 					console.log('Fail during geting user test ID from DynamoDB');
@@ -180,9 +193,6 @@
 							jsonTest = JSON.stringify(result.data, null, 3);
 							jsonTest = JSON.stringify(jsonTest);
 							sendSolvedTest(id);
-							
-							
-							
 						});
 
 					$("#surveyContainer").Survey({ model: survey });
@@ -215,12 +225,14 @@
 							'dataType': 'json',
 							crossDomain: true,
 							success: function(resp) { 
-							console.log('good --> successfuly sendSolvedTest to DynamoDB');
+							console.log('good successfuly sendSolvedTest to DynamoDB');
+							alert("Success!");
 							},
 							error: function(resp, err) { 
 								console.log('fail sendSolvedTest to DynamoDB');  
 								console.log(resp); 
 								console.log(err);
+								alert("Try send this test again . . .");
 							}
 							});		
 			}

@@ -41,7 +41,12 @@
                         <a class="nav-link active" id="signOut" href="#" style='color: orange'>
                             Log out
                         </a>
-                    </li>							
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link active" id="help" href="#" style='color: blue'>
+                            Help
+                        </a>
+                    </li>	
                 </ul>
             </div>
         </nav>
@@ -91,6 +96,13 @@
     <script src="js/cognito-auth.js"></script>
 	<script src="js/recruiter.js"></script>
     <script src="js/newTest.js"></script>
+	<script>
+		alert("You can use only Single Input and Radiogroup TOOLBOX from your left.");
+		
+		$('#help').click(function() {
+			alert("You can use only Single Input as open questions\nand Radiogroup as closed question from TOOLBOX.\nAfter finish you should click Save Survey.\nYour test is ready to use.");
+        });
+	</script>
 
 </body>
 
