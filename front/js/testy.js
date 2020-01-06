@@ -43,6 +43,10 @@ $.ajax({
         console.log(ID);
 
         creator.text = data;
+
+        $('#doCSV').click(function () {
+            exportCSVFile(false, data, "exported");
+        });
     }
 });
 
@@ -110,3 +114,59 @@ async function redirectToTesty() {
 }
 
 
+function JSONToCSVConvertor(JSONData) {
+
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';
+    //Set Report title in first row or line
+
+    //CSV += arrData[0] + arrData[1] + arrData[2] + arrData[3] + '\r\n\n';
+
+    //console.log(arrData);
+
+    var line = '';
+    for (var i = 0; i < arrData.length; i++) {
+        if (arrData[i] != '{' && arrData[i] != '}' && arrData[i] != '[' && arrData[i] != ']' && arrData[i] != '"' ) {
+            line = arrData[i];
+        }
+        else if (arrData[i] == '{') {
+            line = '\n';
+        }
+        else line = '';
+        
+        CSV += line;
+
+    }
+
+    return CSV;
+}
+
+function exportCSVFile(headers, items, fileTitle) {
+    if (headers) {
+        item.unshift(headers);
+    }
+
+    //Convert Obj to JSON
+    var jsonObject = JSON.stringify(items);
+
+    var csv = JSONToCSVConvertor(jsonObject);
+    var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, exportedFilenmae);
+    } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilenmae);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+}
