@@ -63,7 +63,7 @@ var data = {
         }
     });
 	$('#deleteUser').click(function() {
-			var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
+			var r = confirm("Are you sure about that???");
 			if(r == true){
 				cognitoUser.deleteUser(function(err, result) {
 					if (err) {

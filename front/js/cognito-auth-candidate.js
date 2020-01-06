@@ -140,7 +140,7 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
             function signinSuccess() {
                 console.log('Successfully Authenticate on ' + email);
 				
-				var r = confirm("Jesteś pewien że chcesz usunąć to konto? \n (Działa więc nie rób tego XD)");
+				var r = confirm("Are you sure about that?");
 				if(r == true){
 					cognitoUserForDelete.deleteUser(function(err, result) {
 						if (err) {
@@ -169,6 +169,8 @@ var RowdyruffBoys = window.RowdyruffBoysCandidates || {};
 							crossDomain: true,
 							success: function(resp) { 
 								console.log('good --> successfuly deleted user from DynamoDB');
+								alert("Success!!! You deleted user.");
+								window.location.href = 'recruiter.html';
 							},
 							error: function(resp, err) { 
 								console.log('fail deleteUser DynamoDB'); 
