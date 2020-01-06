@@ -51,15 +51,16 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 	public String addTest(ArrayList<String> idList, Context context) {
 		HashMap<String, AttributeValue> testMap = new HashMap<String, AttributeValue>();
 		JSONArray ids = new JSONArray();
-		for(int i = 0 ; i < idList.size(); i++) {
+		for (int i = 0; i < idList.size(); i++) {
 			HashMap<String, String> questionId = new HashMap<String, String>();
 			questionId.put("S", idList.get(i));
 			ids.put(questionId);
-		}	
-		testMap.put("test_id", new AttributeValue(replaceLetters(context.getAwsRequestId().substring(0, 10))));
+		}
+		String tempTestId = replaceLetters(context.getAwsRequestId().substring(0, 10));
+		testMap.put("test_id", new AttributeValue(tempTestId));
 		testMap.put("questions_id", new AttributeValue(ids.toString()));
 		ddb.putItem("testTable", testMap);
-		return "Put Test with ids: " + idList.toString();
+		return "Put new test with id=" + tempTestId;
 	}
 
 	public HashMap<String, Object> parseOpenQuestion(JSONObject questionJSON) {
@@ -78,7 +79,7 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 		ArrayList<String> answerList = new ArrayList<>();
 		for (int i = 0; i < choices.length(); i++) {
 			if (i == 4)
-                break;
+				break;
 			JSONObject answer = choices.getJSONObject(i);
 			answerList.add(answer.getString("text"));
 		}
@@ -135,13 +136,15 @@ public class InsertTestIntoDB implements RequestHandler<Object, String> {
 		return questionId;
 
 	}
-	
+
 	public String replaceLetters(String input) {
 		String result = input;
-		result = result.replace("a", "1").replace("b", "2").replace("c", "3")
-				.replace("d", "4").replace("e", "5").replace("f", "6").replace("-", "0");
+		result = result.replace("a", "1").replace("b", "2").replace("c", "3").replace("d", "4").replace("e", "5")
+				.replace("f", "6").replace("-", "0");
 		System.out.println(input);
 		System.out.println(result);
+		if (result.startsWith("0"))
+			result = "9" + result.substring(1);
 		return result;
 	}
 

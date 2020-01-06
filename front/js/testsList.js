@@ -46,8 +46,9 @@ $.ajax({
 			table.append(
 				"<tr>" +
 				"<td>" + test + "</td>" +
-				"<td>" + "<button onclick='editTest(" + test + ")'>Edit</button>" + "</td>" +
-				"<td>" + "<button onclick='assignCandidateMethod(" + test + ")'>assignCandidate</button>" + "</td>" +
+				"<td>" + "<button class=\"btn btn-warning\" onclick='editTest(" + test + ")'>Edit</button>" + "</td>" +
+				"<td>" + "<button class=\"btn btn-primary\" onclick='assignCandidateMethod(" + test + ")'>Assign Candidate</button>" + "</td>" +
+				"<td>" + "<button class=\"btn btn-danger\" onclick='deleteTest(" + test + ")'>Delete</button>" + "</td>" +
 				
 				
 				"</tr>"
@@ -59,6 +60,32 @@ $.ajax({
 function editTest(test) {
 	console.log(test);
     window.location = 'example_test.html?a=' + test;
+}
+
+function deleteTest(test) {
+	console.log(test.toString());
+	
+    //delete
+    url2 = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/deletetest";
+    $.ajax({
+        type: 'POST',
+		data: {
+			'Authorization': RowdyruffBoys.authToken,
+			'Content-Type': 'application/json' 
+		},
+        'url': url2,
+		'data': test.toString(),
+        success: function(resp) { 
+            console.log('odp:' + resp);
+			alert(resp);
+			window.location.href = 'testy.html';
+        },
+        error: function(resp, err) { 
+            console.log('fail'); 
+            console.log(resp); 
+            console.log(err);
+        }
+	});
 }
 
 function assignCandidateMethod(test){
@@ -83,7 +110,8 @@ function assignCandidateMethod(test){
 							'dataType': 'json',
 							crossDomain: true,
 							success: function(resp) { 
-							console.log('good --> successfuly assignedCandidateToTest to DynamoDB');
+								console.log('good --> successfully assignedCandidateToTest to DynamoDB');
+								alert('Successfully assigned candidate to test and added to DynamoDB');
 							},
 							error: function(resp, err) { 
 								console.log('fail assignedCandidateToTest to DynamoDB');  

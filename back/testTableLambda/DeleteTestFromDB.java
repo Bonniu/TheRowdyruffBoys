@@ -2,10 +2,7 @@ package the.rowdyruff.boys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.json.JSONObject;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -13,6 +10,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.model.AmazonDynamoDBException;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -27,17 +25,16 @@ public class DeleteTestFromDB implements RequestHandler<Object, String> {
 
 	@Override
 	public String handleRequest(Object input, Context context) {
-
-		LinkedHashMap<?, ?> mapa = (LinkedHashMap<?, ?>) input;
-		System.out.println(mapa.get("test_id"));
-		String test_id = mapa.get("test_id").toString();
-		JSONObject js = new JSONObject(mapa);
-		System.out.println(js);
-		//System.out.println(js.get("test_id"));
+		String test_id;
+		try {
+			test_id = Long.toString((Long) input);
+		} catch (ClassCastException exception) {
+			test_id = Integer.toString((Integer) input);
+		} catch (Exception exception) {
+			return "Error while removing test";
+		}
 
 		Item item = testTable.getItem("test_id", test_id);
-		System.out.println(item.toJSONPretty());
-
 		String str = (String) item.get("questions_id");
 		str = str.replace("\"", "").replace("S", "").replace(":", "").replace("{", "");
 		str = str.replace("}", "").replace("[", "").replace("]", "");
@@ -47,14 +44,16 @@ public class DeleteTestFromDB implements RequestHandler<Object, String> {
 			questionIDList.add(tmpTab[i]);
 			deleteQuestion(questionIDList.get(i));
 		}
-		System.out.println(questionIDList);
-
 		// usuwanie testu
 		HashMap<String, AttributeValue> item_test = new HashMap<String, AttributeValue>();
 		item_test.put("test_id", new AttributeValue(test_id));
 		ddb.deleteItem("testTable", (Map<String, AttributeValue>) item_test);
-
-		return "Deleted test " + test_id + " and questions";
+		try {
+			ddb.deleteItem("usersWithTests", (Map<String, AttributeValue>) item_test);
+		} catch (AmazonDynamoDBException ignored) {
+			
+		}
+		return "Deleted test with id=" + test_id;
 	}
 
 	public void deleteQuestion(String questionID) {

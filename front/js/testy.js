@@ -64,7 +64,9 @@ creator.saveSurveyFunc = function () {
         'data': JSON.stringify(JSON.parse(creator.text)),
         'dataType': 'json',
         success: function(resp) { 
-            console.log('good');
+            console.log('on success');
+			console.log(resp);
+			alert(resp);
         },
         error: function(resp, err) { 
             console.log('fail'); 
@@ -75,18 +77,19 @@ creator.saveSurveyFunc = function () {
 	console.log('po add');
 	
 	//delete
-    url2 = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/testtableremove";
+    url2 = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/deletetest";
     $.ajax({
-        type: 'GET',
+        type: 'POST',
 		data: {
-			'Content-Type': 'application/json',
 			'Authorization': RowdyruffBoys.authToken,
-			'test_id': ID
+			'Content-Type': 'application/json' 
 		},
         'url': url2,
+		'data': ID,
         success: function(resp) { 
-            console.log('remove');
-			console.log(ID);
+            console.log('on success delete');
+			console.log(resp);
+			alert(resp);
         },
         error: function(resp, err) { 
             console.log('fail'); 
@@ -94,8 +97,16 @@ creator.saveSurveyFunc = function () {
             console.log(err);
         }
 	});
-	console.log('po delete');
+	redirectToTesty();
+	
 };
 
+async function redirectToTesty() {
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	await sleep(3000);
+	window.location.href = 'testy.html';
+}
 
 

@@ -37,7 +37,9 @@ creator.saveSurveyFunc = function () {
         'data': JSON.stringify(JSON.parse(creator.text)),
         'dataType': 'json',
         success: function(resp) { 
-            console.log('good');
+            console.log('on success');
+			alert(resp);
+			window.location.href = 'testy.html';
         },
         error: function(resp, err) { 
             console.log('fail'); 
