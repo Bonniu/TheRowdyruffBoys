@@ -23,6 +23,7 @@ var options = {
     showLogicTab: true
 };
 var creator = new SurveyCreator.SurveyCreator("creatorElement", options);
+var txt = ""; //tu bedzie przechowywany caly test przetlumaczony
 
 //Setting this callback will make visible the "Save" button
 creator.saveSurveyFunc = function () {
@@ -53,7 +54,7 @@ creator.saveSurveyFunc = function () {
 		//sprawdzamy czy "type":"text" czy "type":"radiogroup"
 		//jezeli "text" to tlumaczymy tylko "title"
 		//jezeli "radiogroup" to tlumaczymy "title" oraz tablice "choices"
-		var txt = JSON.parse(creator.text);
+		txt = JSON.parse(creator.text);
 		if(text != null) {
 			for( let i = 0; i < txt.pages.length; i++) {
 				for( let j = 0; j < txt.pages[i].elements.length; j++) {
@@ -91,25 +92,30 @@ creator.text = "{}";
     });
 }(jQuery));
 
+var abc = "";
 $('#translate').click(function() {
 	getTranslatorEN_PL("bad");
 	
 	//DO PRZEMYŚLENIA
-	function someFunc() {
+	// function someFunc() {
 
-	callAjaxfunc(function() {
-		console.log('Pass2');
-	});
+	// callAjaxfunc(function() {
+		// console.log('Pass2');
+	// });
 
-	}
+	// }
 
-	function callAjaxfunc(callback) {
+	// function callAjaxfunc(callback) {
 		//All ajax calls called here
 		// onAjaxSuccess: function() {
 			// callback();
 		// };
-		console.log('Pass1');    
-	}
+		// console.log('Pass1');    
+	// }
+});
+
+$('#getA').click(function() {
+	console.log(abc);
 });
 
 function getTranslatorEN_PL(text) {
@@ -128,7 +134,9 @@ function getTranslatorEN_PL(text) {
 				var json = result;
 				if(json.def[0] != null) {
 					var r = json.def[0].tr[0].text
-					console.log("tłumacz RU-PL: " + text_ + " --> " + r);			
+					abc = r;
+					console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+					//console.log(this.change);
 					//return r;
 				} else {
 					alert("no traslate pl");
