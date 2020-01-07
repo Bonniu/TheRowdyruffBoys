@@ -25,6 +25,10 @@ var options = {
 var creator = new SurveyCreator.SurveyCreator("creatorElement", options);
 var txt = ""; //tu bedzie przechowywany caly test przetlumaczony
 
+var jsonStr = '{"all":[]}';
+var obj = JSON.parse(jsonStr);
+
+
 //Setting this callback will make visible the "Save" button
 creator.saveSurveyFunc = function () {
     $.ajax({
@@ -60,19 +64,32 @@ creator.saveSurveyFunc = function () {
 			for( let i = 0; i < txt.pages.length; i++) {
 				for( let j = 0; j < txt.pages[i].elements.length; j++) {
 					if(txt.pages[i].elements[j].type == "text") {
-						getTranslatorEN_PL_title(txt.pages[i].elements[j].title, i, j);
+						//getTranslatorEN_PL_title(txt.pages[i].elements[j].title, i, j);
+						obj.all.push({"title":[]});
+						var split_text = txt.pages[i].elements[j].title.split(" ");
+						var how_many = split_text.length;
+						for(let ii = 0; ii < how_many; ii++) {
+							obj.all[j].title.push("");
+						}
+						
 					} else if(txt.pages[i].elements[j].type == "radiogroup") {
-						getTranslatorEN_PL_title(txt.pages[i].elements[j].title, i, j);
+						//getTranslatorEN_PL_title(txt.pages[i].elements[j].title, i, j);
+						obj.all.push({"title":[], "choices":[[],[],[]]});
+						var split_text = txt.pages[i].elements[j].title.split(" ");
+						var how_many = split_text.length;
+						for(let ii = 0; ii < how_many; ii++) {
+							obj.all[j].title.push("");
+						}
+						
 						for(let t = 0; t < txt.pages[i].elements[j].choices.length; t++) {
-							getTranslatorEN_PL_choices(txt.pages[i].elements[j].choices[t].text, i, j, t);
+							//getTranslatorEN_PL_choices(txt.pages[i].elements[j].choices[t].text, i, j, t);
 						}
 					}
 				}
 			}
+			console.log(obj);
 		}
-		//nasz txt wysyłamy do DynamoDB jako od razu przetłumaczoną wersję.
 		//DZIAŁA tylko dla pojedynczych słów XD
-		//alert(JSON.stringify(JSON.parse(creator.text)));
 		
 		//muszę zrobić oddzielne listy na przechowywanie tych tłumaczeń i muszą być oznaczone i wkładane na odpowiednie miejsce.
 		
@@ -94,9 +111,23 @@ creator.text = "{}";
     });
 }(jQuery));
 
-var abc = "";
+
 $('#translate').click(function() {
-	getTranslatorEN_PL("bad");
+	//getTranslatorEN_PL("bad");
+	// var a = "hello this is my question";
+	// var b = a.split(" ");
+	// console.log(b);
+	
+	var jsonStr = '{"all":[]}';
+	var obj = JSON.parse(jsonStr);
+	//DECYZJA CZY OTWARTE CZY ZAMKNIĘTE --> policzenie ile słów w title i w kazdym z choices
+	obj.all.push({"title":[]});
+	obj.all[0].title.push("","","","");
+	obj.all.push({"title":[]});
+	obj.all.push({"title":[], "choices":[{"0":[]},{"1":[]},{"2":[]}]});
+	//jsonStr = JSON.stringify(obj);
+	console.log(obj.all[0]);
+	
 });
 
 $('#gettxt').click(function() {
