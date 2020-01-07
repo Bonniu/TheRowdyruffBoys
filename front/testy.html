@@ -91,6 +91,13 @@
             </div>
         </div>
     </div>
+
+    <div id="bottondiv">
+        <input type="file" id="inputfile" />
+        <input type="button" id="viewfile" value="Import file" />
+        <br><br>
+    </div>
+    
 	<!-- / -->
 		<!-- <div class="assignCandidate"> -->
 	  <!-- <div class="form"> -->
@@ -124,6 +131,50 @@
     <script src="js/recruiter.js"></script>
     <script src="js/testsList.js"></script>
     <!-- <script src="js/testy.js"></script> -->
+    
+    <script>
+        
+        $(document).ready(function () {
+            $('#viewfile').click(function () {
+                
+                let url = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/";
+
+                var rdr = new FileReader();
+                rdr.onload = function (e) {
+                    //get the rows into the array
+                    var therows = e.target.result.split();
+                    console.log(JSON.stringify(JSON.parse(therows[0])));
+                    
+                    $.ajax({
+                        headers: {
+                            'Authorization': RowdyruffBoys.authToken,
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        'type': 'POST',
+                        'url': url,
+                        'data': JSON.stringify(JSON.parse(therows[0])),
+                        'dataType': 'json',
+                        success: function(resp) { 
+                            console.log('on success');
+			                console.log(resp);
+                            alert(resp);
+			                window.location.href = 'testy.html';
+                        },
+                        error: function(resp, err) { 
+                            console.log('fail'); 
+                            console.log(resp); 
+                            console.log(err);
+                        }
+                    });
+                }
+
+                rdr.readAsText($('#inputfile')[0].files[0]);
+            });
+        });
+
+        
+    </script>
 
 </body>
 

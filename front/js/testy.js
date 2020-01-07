@@ -119,22 +119,17 @@ function JSONToCSVConvertor(JSONData) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';
-    //Set Report title in first row or line
-
-    //CSV += arrData[0] + arrData[1] + arrData[2] + arrData[3] + '\r\n\n';
-
-    //console.log(arrData);
 
     var line = '';
     for (var i = 0; i < arrData.length; i++) {
-        if (arrData[i] != '{' && arrData[i] != '}' && arrData[i] != '[' && arrData[i] != ']' && arrData[i] != '"' ) {
+        // if (arrData[i] != '{' && arrData[i] != '}' && arrData[i] != '[' && arrData[i] != ']' && arrData[i] != '"' ) {
             line = arrData[i];
-        }
-        else if (arrData[i] == '{') {
-            line = '\n';
-        }
-        else line = '';
-        
+        // }
+        // else if (arrData[i] == '{') {
+        //     line = '\n';
+        // }
+        // else line = '';
+
         CSV += line;
 
     }
