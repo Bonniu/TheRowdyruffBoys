@@ -121,10 +121,21 @@ creator.saveSurveyFunc = function () {
 			//TERAZ ZOSTAŁO TYLKO 
 			//wydobyć słowa i złożyć w zdania z 'obj' do 'txt' w odpowiednie miejsca 
 			//i gotowy json wysyłany będzie do bazy danych
+			redirectToTesty();
+			
+			
 		}
 };
 
 creator.text = "{}";
+
+async function redirectToTesty() {
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	await sleep(2000);
+	getElementsFromObj();
+}
 
 (function questionAddScopeWrapper($) {
 	var authToken;
@@ -161,9 +172,54 @@ $('#translate').click(function() {
 
 $('#gettxt').click(function() {
 	//TO JEST DO dynamoDB do przekazania
+	
+	
 	console.log(obj);
+	console.log(txt);
 });
 //KONIEC TESTÓW ****************************************************************************
+
+function getElementsFromObj(){
+	console.log("getElementsFromObj");
+	//alert("getElementsFromObj");
+	for( let i = 0; i < txt.pages.length; i++) {
+		for( let j = 0; j < txt.pages[i].elements.length; j++) {
+			if(txt.pages[i].elements[j].type == "text") {
+				var split_text = txt.pages[i].elements[j].title.split(" ");
+				for(let jj = 0; jj < split_text.length; jj++) { 
+					getTranslateFromObjToTxt_title(i, j, jj);
+				}
+				
+			} else if(txt.pages[i].elements[j].type == "radiogroup") {
+				var split_text = txt.pages[i].elements[j].title.split(" ");
+				for(let jj = 0; jj < split_text.length; jj++) {
+					getTranslateFromObjToTxt_title(i, j, jj);
+				}
+				
+				for(let t = 0; t < txt.pages[i].elements[j].choices.length; t++) {
+					var split_text = txt.pages[i].elements[j].choices[t].text.split(" ");
+					for(let jj = 0; jj < split_text.length; jj++) {
+						getTranslateFromObjToTxt_choices(i, j, jj, t);
+					}
+				}
+			}
+		}
+	}
+}
+
+function getTranslateFromObjToTxt_title(i, j, jj){
+	if(jj == 0) {
+		txt.pages[i].elements[j].title = "";
+	}
+	txt.pages[i].elements[j].title += obj.all[j].title[jj] + " ";
+}
+
+function getTranslateFromObjToTxt_choices(i, j, jj, t){
+	if(jj == 0) {
+		txt.pages[i].elements[j].choices[t].text = "";
+	}
+	txt.pages[i].elements[j].choices[t].text += obj.all[j].choices[t].text[jj] + " ";
+}
 
 function getTranslatorEN_PL(text) {
 	let url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=en-ru&text=";
