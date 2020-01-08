@@ -71,17 +71,18 @@ creator.saveSurveyFunc = function () {
 							obj.all[j].title.push("");
 						}
 					} else if(txt.pages[i].elements[j].type == "radiogroup") {
-						obj.all.push({"title":[], "choices":[[],[],[]]});
+						obj.all.push({"title":[], "choices":[]});
 						var split_text = txt.pages[i].elements[j].title.split(" ");
 						var how_many = split_text.length;
 						for(let ii = 0; ii < how_many; ii++) {
 							obj.all[j].title.push("");
 						}
 						for(let t = 0; t < txt.pages[i].elements[j].choices.length; t++) {
+							obj.all[j].choices.push({"text":[]});
 							var split_text = txt.pages[i].elements[j].choices[t].text.split(" ");
 							var how_many = split_text.length;
 							for(let ii = 0; ii < how_many; ii++) {
-								obj.all[j].choices[t].push("");
+								obj.all[j].choices[t].text.push("");
 							}
 						}
 					}
@@ -89,31 +90,37 @@ creator.saveSurveyFunc = function () {
 			}
 			console.log(obj);
 			
-			//Nie sprawdzane
+			//j --> które pytanie, jj --> które słowo, t--> która odpowiedź z konkretnego pytania
 			for( let i = 0; i < txt.pages.length; i++) {
 				for( let j = 0; j < txt.pages[i].elements.length; j++) {
 					if(txt.pages[i].elements[j].type == "text") {
 						var split_text = txt.pages[i].elements[j].title.split(" ");
-						for(let jj = 0; jj < split_text.length; jj++) {
-							//getTranslatorEN_PL_title(txt.pages[i].elements[j].title, j, jj);
+						for(let jj = 0; jj < split_text.length; jj++) { 
+							//console.log(split_text[jj]);
+							getTranslatorEN_PL_title(split_text[jj], j, jj);
 						}
 						
 					} else if(txt.pages[i].elements[j].type == "radiogroup") {
 						var split_text = txt.pages[i].elements[j].title.split(" ");
 						for(let jj = 0; jj < split_text.length; jj++) {
-							//getTranslatorEN_PL_title(txt.pages[i].elements[j].title, j, jj);
+							//console.log(split_text[jj]);
+							getTranslatorEN_PL_title(split_text[jj], j, jj);
 						}
 						
 						for(let t = 0; t < txt.pages[i].elements[j].choices.length; t++) {
-							var split_text = txt.pages[i].elements[j].choices[t].split(" ");
+							var split_text = txt.pages[i].elements[j].choices[t].text.split(" ");
 							for(let jj = 0; jj < split_text.length; jj++) {
-								//getTranslatorEN_PL_title(txt.pages[i].elements[j].choices[t].text, j, jj, t);
+								//console.log(split_text[jj]);
+								getTranslatorEN_PL_choices(split_text[jj], j, jj, t);
 							}
 						}
 					}
 				}
 			}
-			console.log(obj);
+			
+			//TERAZ ZOSTAŁO TYLKO 
+			//wydobyć słowa i złożyć w zdania z 'obj' do 'txt' w odpowiednie miejsca 
+			//i gotowy json wysyłany będzie do bazy danych
 		}
 };
 
@@ -133,7 +140,7 @@ creator.text = "{}";
     });
 }(jQuery));
 
-
+//DO TESTÓW ********************************************************************************
 $('#translate').click(function() {
 	//getTranslatorEN_PL("bad");
 	// var a = "hello this is my question";
@@ -154,8 +161,9 @@ $('#translate').click(function() {
 
 $('#gettxt').click(function() {
 	//TO JEST DO dynamoDB do przekazania
-	console.log(JSON.stringify(txt));
+	console.log(obj);
 });
+//KONIEC TESTÓW ****************************************************************************
 
 function getTranslatorEN_PL(text) {
 	let url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=en-ru&text=";
@@ -173,10 +181,7 @@ function getTranslatorEN_PL(text) {
 				var json = result;
 				if(json.def[0] != null) {
 					var r = json.def[0].tr[0].text
-					//abc = r;
 					console.log("tłumacz RU-PL: " + text_ + " --> " + r);
-					//console.log(this.change);
-					//return r;
 				} else {
 					alert("no traslate pl");
 				}
@@ -187,7 +192,7 @@ function getTranslatorEN_PL(text) {
 	  }});
 }
 
-function getTranslatorEN_PL_title(text, i, j) {
+function getTranslatorEN_PL_title(text, j, jj) {
 	let url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=en-ru&text=";
 	url = url + text;
 	$.ajax({url: url, success: function(result){
@@ -203,7 +208,8 @@ function getTranslatorEN_PL_title(text, i, j) {
 				var json = result;
 				if(json.def[0] != null) {
 					var r = json.def[0].tr[0].text
-					txt.pages[i].elements[j].title = r;
+					//txt.pages[i].elements[j].title = r;
+					obj.all[j].title[jj] = r;
 					console.log("tłumacz RU-PL: " + text_ + " --> " + r);
 				} else {
 					alert("no traslate pl");
@@ -215,7 +221,7 @@ function getTranslatorEN_PL_title(text, i, j) {
 	  }});
 }
 
-function getTranslatorEN_PL_choices(text, i, j, t) {
+function getTranslatorEN_PL_choices(text, j, jj, t) {
 	let url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=en-ru&text=";
 	url = url + text;
 	$.ajax({url: url, success: function(result){
@@ -231,7 +237,8 @@ function getTranslatorEN_PL_choices(text, i, j, t) {
 				var json = result;
 				if(json.def[0] != null) {
 					var r = json.def[0].tr[0].text
-					txt.pages[i].elements[j].choices[t].text = r;
+					//txt.pages[i].elements[j].choices[t].text = r;
+					obj.all[j].choices[t].text[jj] = r;					
 					console.log("tłumacz RU-PL: " + text_ + " --> " + r);
 				} else {
 					alert("no traslate pl");
