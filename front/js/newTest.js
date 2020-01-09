@@ -19,15 +19,25 @@ RowdyruffBoys.map = RowdyruffBoys.map || {};
 
 let url = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/";
 //arn:aws:lambda:us-east-1:994435743906:function:insertTestIntoDB
-var options = {
-    showLogicTab: true
+var creatorOptions = {
+    questionTypes: ["text", "radiogroup"]
 };
-var creator = new SurveyCreator.SurveyCreator("creatorElement", options);
+var creator = new SurveyCreator.SurveyCreator("creatorElement", creatorOptions);
 var txt = ""; //tu bedzie przechowywany caly test przetlumaczony
 
 var jsonStr = '{"all":[]}';
 var obj = JSON.parse(jsonStr);
 
+creator
+    .toolbarItems
+    .push({
+        id: "custom-preview",
+        visible: true,
+        title: "Translate",
+        action: function () {
+        console.log("EloXD")
+        }
+    });
 
 //Setting this callback will make visible the "Save" button
 creator.saveSurveyFunc = function () {
