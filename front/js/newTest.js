@@ -20,7 +20,8 @@ RowdyruffBoys.map = RowdyruffBoys.map || {};
 let url = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/";
 //arn:aws:lambda:us-east-1:994435743906:function:insertTestIntoDB
 var creatorOptions = {
-    questionTypes: ["text", "radiogroup"]
+	questionTypes: ["text", "radiogroup"],
+	showTranslationTab: true
 };
 var creator = new SurveyCreator.SurveyCreator("creatorElement", creatorOptions);
 var txt = ""; //tu bedzie przechowywany caly test przetlumaczony
@@ -33,9 +34,9 @@ creator
     .push({
         id: "custom-preview",
         visible: true,
-        title: "Translate",
+        title: "Export to CSV",
         action: function () {
-        console.log("EloXD")
+			exportCSVFile(false, data, "exported");
         }
 	});
 	
@@ -317,4 +318,57 @@ function getTranslatorEN_PL_choices(text, j, jj, t) {
 			alert("no traslate ru");
 		}
 	  }});
+}
+
+
+function JSONToCSVConvertor(JSONData) {
+
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';
+
+    var line = '';
+    for (var i = 0; i < arrData.length; i++) {
+        // if (arrData[i] != '{' && arrData[i] != '}' && arrData[i] != '[' && arrData[i] != ']' && arrData[i] != '"' ) {
+            line = arrData[i];
+        // }
+        // else if (arrData[i] == '{') {
+        //     line = '\n';
+        // }
+        // else line = '';
+
+        CSV += line;
+
+    }
+
+    return CSV;
+}
+
+function exportCSVFile(headers, items, fileTitle) {
+    if (headers) {
+        item.unshift(headers);
+    }
+
+    //Convert Obj to JSON
+    var jsonObject = JSON.stringify(items);
+
+    var csv = JSONToCSVConvertor(jsonObject);
+    var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, exportedFilenmae);
+    } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilenmae);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
 }

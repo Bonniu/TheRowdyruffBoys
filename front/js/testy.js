@@ -50,9 +50,21 @@ $.ajax({
         console.log(ID);
 
         creator.text = data;
+
     }
 });
 
+
+creator
+    .toolbarItems
+    .push({
+        id: "custom-preview",
+        visible: true,
+        title: "Export to CSV",
+        action: function () {
+            exportCSVFile(false, creator.text, "exported");
+        }
+	});
 
 creator.saveSurveyFunc = function () {
 	console.log('save w edit');
