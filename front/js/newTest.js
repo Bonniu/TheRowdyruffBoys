@@ -37,7 +37,10 @@ creator
         action: function () {
         console.log("EloXD")
         }
-    });
+	});
+	
+	creator.showToolbox = "right";
+	creator.showPropertyGrid = "right";
 
 //Setting this callback will make visible the "Save" button
 creator.saveSurveyFunc = function () {

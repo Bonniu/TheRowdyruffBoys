@@ -24,10 +24,17 @@ let ID = url.searchParams.get("a");
 
 }(jQuery));
 
-var options = {
-    showLogicTab: true
+Survey.surveyLocalization.supportedLocales = ["en", "pl"];
+
+var creatorOptions = {
+    questionTypes: ["text", "radiogroup"],
+    showTranslationTab: true
 };
-var creator = new SurveyCreator.SurveyCreator("survey", options);
+var creator = new SurveyCreator.SurveyCreator("survey", creatorOptions);
+
+creator.showToolbox = "right";
+creator.showPropertyGrid = "right";
+
 
 $.ajax({
     type: "GET",
@@ -43,10 +50,6 @@ $.ajax({
         console.log(ID);
 
         creator.text = data;
-
-        $('#doCSV').click(function () {
-            exportCSVFile(false, data, "exported");
-        });
     }
 });
 
