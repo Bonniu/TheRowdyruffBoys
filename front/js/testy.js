@@ -64,73 +64,71 @@ creator
         action: function () {
             exportCSVFile(false, creator.text, "exported");
         }
-	});
+    });
 
 creator.saveSurveyFunc = function () {
-	console.log('save w edit');
+    console.log('save w edit');
 
-	//add
-	let url2 = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/";
-	$.ajax({
-		
-        headers: { 
+    //add
+    let url2 = "https://qqtxipf377.execute-api.us-east-1.amazonaws.com/insertTest/";
+    $.ajax({
+
+        headers: {
             'Authorization': RowdyruffBoys.authToken,
             'Accept': 'application/json',
-            'Content-Type': 'application/json' 
+            'Content-Type': 'application/json'
         },
         'type': 'POST',
         'url': url2,
         'data': JSON.stringify(JSON.parse(creator.text)),
         'dataType': 'json',
-        success: function(resp) { 
+        success: function (resp) {
             console.log('on success');
-			console.log(resp);
-			alert(resp);
+            console.log(resp);
+            alert(resp);
         },
-        error: function(resp, err) { 
-            console.log('fail'); 
-            console.log(resp); 
+        error: function (resp, err) {
+            console.log('fail');
+            console.log(resp);
             console.log(err);
         }
-	});
-	console.log('po add');
-	
-	//delete
+    });
+    console.log('po add');
+
+    //delete
     url2 = "https://0hqj2kdr41.execute-api.us-east-1.amazonaws.com/testTable/deletetest";
     $.ajax({
         type: 'POST',
-		data: {
-			'Authorization': RowdyruffBoys.authToken,
-			'Content-Type': 'application/json' 
-		},
-        'url': url2,
-		'data': ID,
-        success: function(resp) { 
-            console.log('on success delete');
-			console.log(resp);
-			alert(resp);
+        data: {
+            'Authorization': RowdyruffBoys.authToken,
+            'Content-Type': 'application/json'
         },
-        error: function(resp, err) { 
-            console.log('fail'); 
-            console.log(resp); 
+        'url': url2,
+        'data': ID,
+        success: function (resp) {
+            console.log('on success delete');
+            console.log(resp);
+            alert(resp);
+        },
+        error: function (resp, err) {
+            console.log('fail');
+            console.log(resp);
             console.log(err);
         }
-	});
-	redirectToTesty();
-	
+    });
+    redirectToTesty();
+
 };
 
 async function redirectToTesty() {
-	function sleep(ms) {
-		return new Promise(resolve => setTimeout(resolve, ms));
-	}
-	await sleep(3000);
-	window.location.href = 'testy.html';
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    await sleep(3000);
+    window.location.href = 'testy.html';
 }
 
-
-function JSONToCSVConvertor(JSONData) {
-
+function JSONToCSVConvertor(objArray) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';
@@ -138,7 +136,7 @@ function JSONToCSVConvertor(JSONData) {
     var line = '';
     for (var i = 0; i < arrData.length; i++) {
         // if (arrData[i] != '{' && arrData[i] != '}' && arrData[i] != '[' && arrData[i] != ']' && arrData[i] != '"' ) {
-            line = arrData[i];
+        line = arrData[i];
         // }
         // else if (arrData[i] == '{') {
         //     line = '\n';
@@ -154,13 +152,11 @@ function JSONToCSVConvertor(JSONData) {
 
 function exportCSVFile(headers, items, fileTitle) {
     if (headers) {
-        item.unshift(headers);
+        items.unshift(headers);
     }
-
-    //Convert Obj to JSON
+    // Convert Object to JSON
     var jsonObject = JSON.stringify(items);
-
-    var csv = JSONToCSVConvertor(jsonObject);
+    var csv = this.JSONToCSVConvertor(jsonObject);
     var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
 
     var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });

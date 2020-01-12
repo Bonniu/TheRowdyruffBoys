@@ -36,7 +36,7 @@ creator
         visible: true,
         title: "Export to CSV",
         action: function () {
-			exportCSVFile(false, data, "exported");
+			exportCSVFile(false, creator.text, "exported");
         }
 	});
 	
