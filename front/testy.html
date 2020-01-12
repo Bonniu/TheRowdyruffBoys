@@ -81,7 +81,6 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-                </table>
             </div>
         </div>
 
@@ -92,26 +91,23 @@
         </div>
     </div>
 
-    <div id="bottondiv">
+	<div class="input-group mb-3" id="bottondiv">
+		<div class="custom-file">
+			<input type="file" class="custom-file-input" id="inputfile">
+			<label class="custom-file-label pd-2" for="inputfile">Choose file to import</label>
+	    </div>
+		<div class="input-group-append">
+			<input type="button" id="viewfile" class="btn btn-success" value="Import file" />
+		</div>
+	</div>
+	
+<!-- 
+<div id="bottondiv">
         <input type="file" id="inputfile" />
         <input type="button" id="viewfile" value="Import file" />
         <br><br>
     </div>
-    
-	<!-- / -->
-		<!-- <div class="assignCandidate"> -->
-	  <!-- <div class="form"> -->
-		<!-- <form class="login-form" id="assigningCandidatePackage"> -->
-			<!-- <p>Type email and testID.</p> -->
-            <!-- <input type="email" id="emailInputToAssignCandidate" placeholder="Candidate email" pattern=".*" required> -->
-            <!-- <input type="testId" id="testIdInputToAssignCandidate" placeholder="testId" pattern=".*" required> -->
- 
-			<!-- <button type="button" id="elo123" onclick="onclickHandler();">Click Me!</button> -->
-		<!-- </form> -->
-	  <!-- </div> -->
-	<!-- </div> -->
-
-<!-- / -->
+ -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
