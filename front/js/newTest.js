@@ -165,24 +165,24 @@ async function redirectToTesty() {
 	});
 }(jQuery));
 
-//DO TESTÓW ********************************************************************************
-$('#translate').click(function () {
-	//getTranslatorEN_PL("bad");
-	// var a = "hello this is my question";
-	// var b = a.split(" ");
-	// console.log(b);
+// //DO TESTÓW ********************************************************************************
+// $('#translate').click(function () {
+// 	//getTranslatorEN_PL("bad");
+// 	// var a = "hello this is my question";
+// 	// var b = a.split(" ");
+// 	// console.log(b);
 
-	var jsonStr = '{"all":[]}';
-	var obj = JSON.parse(jsonStr);
-	//DECYZJA CZY OTWARTE CZY ZAMKNIĘTE --> policzenie ile słów w title i w kazdym z choices
-	obj.all.push({ "title": [] });
-	obj.all[0].title.push("", "", "", "");
-	obj.all.push({ "title": [] });
-	obj.all.push({ "title": [], "choices": [{ "0": [] }, { "1": [] }, { "2": [] }] });
-	//jsonStr = JSON.stringify(obj);
-	console.log(obj.all[0]);
+// 	var jsonStr = '{"all":[]}';
+// 	var obj = JSON.parse(jsonStr);
+// 	//DECYZJA CZY OTWARTE CZY ZAMKNIĘTE --> policzenie ile słów w title i w kazdym z choices
+// 	obj.all.push({ "title": [] });
+// 	obj.all[0].title.push("", "", "", "");
+// 	obj.all.push({ "title": [] });
+// 	obj.all.push({ "title": [], "choices": [{ "0": [] }, { "1": [] }, { "2": [] }] });
+// 	//jsonStr = JSON.stringify(obj);
+// 	console.log(obj.all[0]);
 
-});
+// });
 
 $('#gettxt').click(function () {
 	//TO JEST DO dynamoDB do przekazania
