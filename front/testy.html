@@ -137,39 +137,67 @@
 
                 var rdr = new FileReader();
                 rdr.onload = function (e) {
-                    //get the rows into the array
-                    var therows = e.target.result.split();
-                    console.log(JSON.stringify(JSON.parse(therows[0])));
+                //get the rows into the array
+                var therows = e.target.result.split();
+                var arrData = therows[0];
+                var aa = '{"';
+                var line = '';
+                var pom = 0;
+                for (var i = 0; i < arrData.length; i++) {
+                    if (arrData[i] == ':' && arrData[i+1] == '\n') {
+                        line='":[{"';
+                        i=i+1;
+                        pom=pom+1;
+                    }
+                    else if (arrData[i] == ',' && arrData[i+1] == '\n') {
+                        line='"},{"';
+                        i=i+1;
+                    }
+                    else if (arrData[i] == ':' ) {
+                        line='":"';
+                    }
+                    else if (arrData[i] == ',') {
+                        line='","';
+                    }
+                    else line = arrData[i];
+                    aa += line;
+                }
+                aa=aa+'"}';
+                for (var i = 0; i < pom; i++) {
+                    aa=aa+']}';
+                }            
+                therows[0]=aa;
+                console.log(JSON.stringify(JSON.parse(therows)));
                     
-                    $.ajax({
-                        headers: {
-                            'Authorization': RowdyruffBoys.authToken,
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        'type': 'POST',
-                        'url': url,
-                        'data': JSON.stringify(JSON.parse(therows[0])),
-                        'dataType': 'json',
-                        success: function(resp) { 
-                            console.log('on success');
-			                console.log(resp);
-                            alert(resp);
-			                window.location.href = 'testy.html';
-                        },
-                        error: function(resp, err) { 
-                            console.log('fail'); 
-                            console.log(resp); 
-                            console.log(err);
-                        }
-                    });
+                $.ajax({
+                    headers: {
+                        'Authorization': RowdyruffBoys.authToken,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    'type': 'POST',
+                    'url': url,
+                    'data': JSON.stringify(JSON.parse(therows)),
+                    'dataType': 'json',
+                    success: function(resp) { 
+                        console.log('on success');
+			            console.log(resp);
+                        alert(resp);
+			            window.location.href = 'testy.html';
+                    },
+                    error: function(resp, err) { 
+                        console.log('fail'); 
+                        console.log(resp); 
+                        console.log(err);
+                    }
+                });
                 }
 
-                rdr.readAsText($('#inputfile')[0].files[0]);
+            rdr.readAsText($('#inputfile')[0].files[0]);
             });
         });
 
-        
+
     </script>
 
 </body>

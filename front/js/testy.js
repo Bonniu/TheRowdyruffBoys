@@ -1,5 +1,3 @@
-
-
 var RowdyruffBoys = window.RowdyruffBoys || {};
 RowdyruffBoys.map = RowdyruffBoys.map || {};
 
@@ -62,7 +60,8 @@ creator
         visible: true,
         title: "Export to CSV",
         action: function () {
-            exportCSVFile(false, creator.text, "exported");
+            console.log(JSON.stringify(JSON.parse(creator.text)));
+            exportCSVFile(false, JSON.stringify(JSON.parse(creator.text)), "exported");
         }
     });
 
@@ -128,20 +127,37 @@ async function redirectToTesty() {
     window.location.href = 'testy.html';
 }
 
-function JSONToCSVConvertor(objArray) {
+function JSONToCSVConvertor(JSONData) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';
 
     var line = '';
     for (var i = 0; i < arrData.length; i++) {
-        // if (arrData[i] != '{' && arrData[i] != '}' && arrData[i] != '[' && arrData[i] != ']' && arrData[i] != '"' ) {
-        line = arrData[i];
-        // }
-        // else if (arrData[i] == '{') {
-        //     line = '\n';
-        // }
-        // else line = '';
+        if (arrData[i] == '"' && arrData[i+1] == ':' && arrData[i+2] == '"') {
+            line=':';
+            i=i+2;
+        }
+        else if (arrData[i] == '"' && arrData[i+1] == ',' && arrData[i+2] == '"') {
+            line=',';
+            i=i+2;
+        }
+        else if (arrData[i] == '"' && arrData[i+1] == ':' && arrData[i+2] == '[' && arrData[i+3] == '{' && arrData[i+4] == '"') {
+            line=':\n';
+            i=i+4;
+        } 
+        else if (arrData[i] == '"' && arrData[i+1] == '}' && arrData[i+2] == ',' && arrData[i+3] == '{' && arrData[i+4] == '"') {
+            line=',\n';
+            i=i+4;
+        }
+        else if (arrData[i] == '{' && arrData[i+1] == '"' ) {
+            line='';
+            i=i+1;
+        }
+        else if (arrData[i] == '"' || arrData[i] == '}' || arrData[i] == ']' ) {
+            line='';
+        }
+        else line = arrData[i];
 
         CSV += line;
 
