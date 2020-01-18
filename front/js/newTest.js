@@ -93,53 +93,53 @@ creator.saveSurveyFunc = function () {
 	//TERAZ ZOSTAŁO TYLKO 
 	//wydobyć słowa i złożyć w zdania z 'obj' do 'txt' w odpowiednie miejsca 
 	//i gotowy json wysyłany będzie do bazy danych
-	redirectToTesty();
+
 
 };
 
 creator.text = "{}";
 
 function getElementsFromObj() {
-		console.log("getElementsFromObj");
-		//alert("getElementsFromObj");
-		for (let i = 0; i < txt.pages.length; i++) {
-			for (let j = 0; j < txt.pages[i].elements.length; j++) {
-				if (txt.pages[i].elements[j].type == "text") {
-					var split_text = txt.pages[i].elements[j].title.split(" ");
-					for (let jj = 0; jj < split_text.length; jj++) {
-						getTranslateFromObjToTxt_title(i, j, jj);
-					}
+	console.log("getElementsFromObj");
+	//alert("getElementsFromObj");
+	for (let i = 0; i < txt.pages.length; i++) {
+		for (let j = 0; j < txt.pages[i].elements.length; j++) {
+			if (txt.pages[i].elements[j].type == "text") {
+				var split_text = txt.pages[i].elements[j].title.split(" ");
+				for (let jj = 0; jj < split_text.length; jj++) {
+					getTranslateFromObjToTxt_title(i, j, jj);
+				}
 
-				} else if (txt.pages[i].elements[j].type == "radiogroup") {
-					var split_text = txt.pages[i].elements[j].title.split(" ");
-					for (let jj = 0; jj < split_text.length; jj++) {
-						getTranslateFromObjToTxt_title(i, j, jj);
-					}
+			} else if (txt.pages[i].elements[j].type == "radiogroup") {
+				var split_text = txt.pages[i].elements[j].title.split(" ");
+				for (let jj = 0; jj < split_text.length; jj++) {
+					getTranslateFromObjToTxt_title(i, j, jj);
+				}
 
-					for (let t = 0; t < txt.pages[i].elements[j].choices.length; t++) {
-						var split_text = txt.pages[i].elements[j].choices[t].text.split(" ");
-						for (let jj = 0; jj < split_text.length; jj++) {
-							getTranslateFromObjToTxt_choices(i, j, jj, t);
-						}
+				for (let t = 0; t < txt.pages[i].elements[j].choices.length; t++) {
+					var split_text = txt.pages[i].elements[j].choices[t].text.split(" ");
+					for (let jj = 0; jj < split_text.length; jj++) {
+						getTranslateFromObjToTxt_choices(i, j, jj, t);
 					}
 				}
 			}
 		}
 	}
+}
 
-	function getTranslateFromObjToTxt_title(i, j, jj) {
-		if (jj == 0) {
-			txt.pages[i].elements[j].title = "";
-		}
-		txt.pages[i].elements[j].title += obj.all[j].title[jj] + " ";
+function getTranslateFromObjToTxt_title(i, j, jj) {
+	if (jj == 0) {
+		txt.pages[i].elements[j].title = "";
 	}
+	txt.pages[i].elements[j].title += obj.all[j].title[jj] + " ";
+}
 
-	function getTranslateFromObjToTxt_choices(i, j, jj, t) {
-		if (jj == 0) {
-			txt.pages[i].elements[j].choices[t].text = "";
-		}
-		txt.pages[i].elements[j].choices[t].text += obj.all[j].choices[t].text[jj] + " ";
+function getTranslateFromObjToTxt_choices(i, j, jj, t) {
+	if (jj == 0) {
+		txt.pages[i].elements[j].choices[t].text = "";
 	}
+	txt.pages[i].elements[j].choices[t].text += obj.all[j].choices[t].text[jj] + " ";
+}
 
 async function redirectToTesty() {
 	function sleep(ms) {
@@ -147,33 +147,8 @@ async function redirectToTesty() {
 	}
 	await sleep(5000);
 	getElementsFromObj();
-	//console.log(txt);
-	//console.log(JSON.stringify(txt));
 	console.log(JSON.parse(JSON.stringify(txt)));
 	creator.text = JSON.stringify(txt);
-	// $.ajax({
-		// headers: {
-			// 'Authorization': RowdyruffBoys.authToken,
-			// 'Accept': 'application/json',
-			// 'Content-Type': 'application/json'
-		// },
-		// 'type': 'POST',
-		// 'url': url,
-		// 'data': JSON.parse(JSON.stringify(txt)),
-		//// JSON.stringify(JSON.parse(txt)) nie dziala
-		// 'dataType': 'json',
-		// success: function (resp) {
-			// console.log('on success transalted');
-			// alert(resp);
-			////window.location.href = 'testy.html';
-		// },
-		// error: function (resp, err) {
-			// console.log('fail');
-			// console.log(resp);
-			// console.log(err);
-		// }
-	// });
-	
 }
 
 (function questionAddScopeWrapper($) {
@@ -278,6 +253,7 @@ function translate() {
 				}
 			}
 		}
+		redirectToTesty();
 	}
 
 	function getTranslatorEN_PL(text) {
