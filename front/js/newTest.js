@@ -28,6 +28,8 @@ var txt = ""; //tu bedzie przechowywany caly test przetlumaczony
 
 var jsonStr = '{"all":[]}';
 var obj = JSON.parse(jsonStr);
+Survey.surveyLocalization.supportedLocales = ["en", "pl"];
+
 
 creator
     .toolbarItems
