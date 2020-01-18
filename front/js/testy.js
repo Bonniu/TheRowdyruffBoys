@@ -46,9 +46,9 @@ creator
 		visible: true,
 		title: "Translate",
 		action: function () {
-			console.log("elo");
+			//console.log("elo");
 			translate();
-			console.log(txt);
+			//console.log(txt);
 		}
 	});
 
@@ -150,8 +150,9 @@ async function redirectToTestySecond(){
 	}
 	await sleep(2000);
 	getElementsFromObj();
-	console.log(JSON.parse(JSON.stringify(txt)));
+	//console.log(JSON.parse(JSON.stringify(txt)));
 	creator.text = JSON.stringify(txt);
+	alert('Translated test into Polish');
 }
 
 function JSONToCSVConvertor(objArray) {
@@ -208,7 +209,6 @@ function exportCSVFile(headers, items, fileTitle) {
 function translate() {
 
 	txt = JSON.parse(creator.text);
-	console.log('123 432' + txt);
 	if (txt != null) {
 		for (let i = 0; i < txt.pages.length; i++) {
 			for (let j = 0; j < txt.pages[i].elements.length; j++) {
@@ -237,7 +237,7 @@ function translate() {
 				}
 			}
 		}
-		console.log(obj);
+		//console.log(obj);
 
 		//j --> które pytanie, jj --> które słowo, t--> która odpowiedź z konkretnego pytania
 		for (let i = 0; i < txt.pages.length; i++) {
@@ -275,27 +275,27 @@ function getTranslatorEN_PL(text) {
     url = url + text;
     $.ajax({
         url: url, success: function (result) {
-            console.log(result);
+            //console.log(result);
             var json = result;
             if (json.def[0] != null) {
                 text_ = json.def[0].tr[0].text;
-                console.log("tłumacz EN-RU: " + text + " --> " + text_);
+                //console.log("tłumacz EN-RU: " + text + " --> " + text_);
                 let url_ = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=ru-pl&text=";
                 url_ = url_ + text_;
                 $.ajax({
                     url: url_, success: function (result) {
-                        console.log(result);
+                        //console.log(result);
                         var json = result;
                         if (json.def[0] != null) {
                             var r = json.def[0].tr[0].text
-                            console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+                            //console.log("tłumacz RU-PL: " + text_ + " --> " + r);
                         } else {
-                            alert("no traslate pl");
+                            //alert("no traslate pl");
                         }
                     }
                 });
             } else {
-                alert("no traslate ru");
+                //alert("no traslate ru");
             }
         }
     });
@@ -306,29 +306,29 @@ function getTranslatorEN_PL_title(text, j, jj) {
     url = url + text;
     $.ajax({
         url: url, success: function (result) {
-            console.log(result);
+            //console.log(result);
             var json = result;
             if (json.def[0] != null) {
                 text_ = json.def[0].tr[0].text;
-                console.log("tłumacz EN-RU: " + text + " --> " + text_);
+                //console.log("tłumacz EN-RU: " + text + " --> " + text_);
                 let url_ = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=ru-pl&text=";
                 url_ = url_ + text_;
                 $.ajax({
                     url: url_, success: function (result) {
-                        console.log(result);
+                        //console.log(result);
                         var json = result;
                         if (json.def[0] != null) {
                             var r = json.def[0].tr[0].text
                             //txt.pages[i].elements[j].title = r;
                             obj.all[j].title[jj] = r;
-                            console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+                            //console.log("tłumacz RU-PL: " + text_ + " --> " + r);
                         } else {
-                            alert("no traslate pl");
+                            //alert("no traslate pl");
                         }
                     }
                 });
             } else {
-                alert("no traslate ru");
+                //alert("no traslate ru");
             }
         }
     });
@@ -339,29 +339,29 @@ function getTranslatorEN_PL_choices(text, j, jj, t) {
     url = url + text;
     $.ajax({
         url: url, success: function (result) {
-            console.log(result);
+            //console.log(result);
             var json = result;
             if (json.def[0] != null) {
                 text_ = json.def[0].tr[0].text;
-                console.log("tłumacz EN-RU: " + text + " --> " + text_);
+                //console.log("tłumacz EN-RU: " + text + " --> " + text_);
                 let url_ = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=ru-pl&text=";
                 url_ = url_ + text_;
                 $.ajax({
                     url: url_, success: function (result) {
-                        console.log(result);
+                        //console.log(result);
                         var json = result;
                         if (json.def[0] != null) {
                             var r = json.def[0].tr[0].text
                             //txt.pages[i].elements[j].choices[t].text = r;
                             obj.all[j].choices[t].text[jj] = r;
-                            console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+                            //console.log("tłumacz RU-PL: " + text_ + " --> " + r);
                         } else {
-                            alert("no traslate pl");
+                           // alert("no traslate pl");
                         }
                     }
                 });
             } else {
-                alert("no traslate ru");
+               // alert("no traslate ru");
             }
         }
     });
@@ -371,7 +371,7 @@ function getTranslatorEN_PL_choices(text, j, jj, t) {
 
 
 function getElementsFromObj() {
-	console.log("getElementsFromObj");
+	//console.log("getElementsFromObj");
 	//alert("getElementsFromObj");
 	for (let i = 0; i < txt.pages.length; i++) {
 		for (let j = 0; j < txt.pages[i].elements.length; j++) {

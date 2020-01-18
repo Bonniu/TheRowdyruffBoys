@@ -73,7 +73,7 @@ creator.saveSurveyFunc = function () {
 		success: function (resp) {
 			console.log('on success');
 			alert(resp);
-			//window.location.href = 'testy.html';
+			window.location.href = 'testy.html';
 		},
 		error: function (resp, err) {
 			console.log('fail');
@@ -149,6 +149,7 @@ async function redirectToTesty() {
 	getElementsFromObj();
 	console.log(JSON.parse(JSON.stringify(txt)));
 	creator.text = JSON.stringify(txt);
+	alert('Translated test into Polish');
 }
 
 (function questionAddScopeWrapper($) {
@@ -261,27 +262,27 @@ function translate() {
 		url = url + text;
 		$.ajax({
 			url: url, success: function (result) {
-				console.log(result);
+				//console.log(result);
 				var json = result;
 				if (json.def[0] != null) {
 					text_ = json.def[0].tr[0].text;
-					console.log("tłumacz EN-RU: " + text + " --> " + text_);
 					let url_ = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=ru-pl&text=";
 					url_ = url_ + text_;
 					$.ajax({
-						url: url_, success: function (result) {
-							console.log(result);
+						url: url_, 
+						success: function (result) {
+							//console.log(result);
 							var json = result;
 							if (json.def[0] != null) {
 								var r = json.def[0].tr[0].text
-								console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+								//console.log("tłumacz RU-PL: " + text_ + " --> " + r);
 							} else {
-								alert("no traslate pl");
+								//alert("no traslate pl");
 							}
 						}
 					});
 				} else {
-					alert("no traslate ru");
+					//alert("no traslate ru");
 				}
 			}
 		});
@@ -292,29 +293,29 @@ function translate() {
 		url = url + text;
 		$.ajax({
 			url: url, success: function (result) {
-				console.log(result);
+				//console.log(result);
 				var json = result;
 				if (json.def[0] != null) {
 					text_ = json.def[0].tr[0].text;
-					console.log("tłumacz EN-RU: " + text + " --> " + text_);
+					//console.log("tłumacz EN-RU: " + text + " --> " + text_);
 					let url_ = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=ru-pl&text=";
 					url_ = url_ + text_;
 					$.ajax({
 						url: url_, success: function (result) {
-							console.log(result);
+							//console.log(result);
 							var json = result;
 							if (json.def[0] != null) {
 								var r = json.def[0].tr[0].text
 								//txt.pages[i].elements[j].title = r;
 								obj.all[j].title[jj] = r;
-								console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+								//console.log("tłumacz RU-PL: " + text_ + " --> " + r);
 							} else {
-								alert("no traslate pl");
+								//alert("no traslate pl");
 							}
 						}
 					});
 				} else {
-					alert("no traslate ru");
+					//alert("no traslate ru");
 				}
 			}
 		});
@@ -325,29 +326,29 @@ function translate() {
 		url = url + text;
 		$.ajax({
 			url: url, success: function (result) {
-				console.log(result);
+				//console.log(result);
 				var json = result;
 				if (json.def[0] != null) {
 					text_ = json.def[0].tr[0].text;
-					console.log("tłumacz EN-RU: " + text + " --> " + text_);
+					//console.log("tłumacz EN-RU: " + text + " --> " + text_);
 					let url_ = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20191230T110607Z.67ee80aaff673d64.91f4ec360d12511dd6be5aaa55ae8b24ef99214f&lang=ru-pl&text=";
 					url_ = url_ + text_;
 					$.ajax({
 						url: url_, success: function (result) {
-							console.log(result);
+							//console.log(result);
 							var json = result;
 							if (json.def[0] != null) {
 								var r = json.def[0].tr[0].text
 								//txt.pages[i].elements[j].choices[t].text = r;
 								obj.all[j].choices[t].text[jj] = r;
-								console.log("tłumacz RU-PL: " + text_ + " --> " + r);
+								//console.log("tłumacz RU-PL: " + text_ + " --> " + r);
 							} else {
-								alert("no traslate pl");
+								//alert("no traslate pl");
 							}
 						}
 					});
 				} else {
-					alert("no traslate ru");
+					//alert("no traslate ru");
 				}
 			}
 		});

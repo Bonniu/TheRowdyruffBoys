@@ -39,7 +39,7 @@ $.ajax({
         let table = $("#IDs").find("tbody");
 
         for (let i of testsList) {
-            console.log((i));
+           // console.log((i));
         }
 
 		for (let test of testsList) {
@@ -48,7 +48,7 @@ $.ajax({
 				"<td>" + test + "</td>" +
 				"<td>" + "<button class=\"btn btn-warning\" onclick='editTest(" + test + ")'>Edit</button>" + "</td>" +
 				"<td>" + "<button class=\"btn btn-primary\" onclick='assignCandidateMethod(" + test + ")'>Assign Candidate</button>" + "</td>" +
-				"<td>" + "<button class=\"btn btn-danger\" onclick='deleteTest(" + test + ")'>Delete</button>" + "</td>" +
+				"<td>" + "<button class=\"btn btn-danger\"  onclick='deleteTest(" + test + ")'>Delete</button>" + "</td>" +
 				
 				
 				"</tr>"
