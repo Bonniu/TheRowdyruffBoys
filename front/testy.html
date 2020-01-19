@@ -138,35 +138,68 @@
                 rdr.onload = function (e) {
                 //get the rows into the array
                 var therows = e.target.result.split();
-                var arrData = therows[0];
-                var aa = '{"';
+                var arrData = therows[0];    
+                var aa = '{"pages":[{"name":"page1","elements":[{"type":"';
                 var line = '';
-                var pom = 0;
-                for (var i = 0; i < arrData.length; i++) {
-                    if (arrData[i] == ':' && arrData[i+1] == '\n') {
-                        line='":[{"';
+                var pom = 1;
+                var pom1 = 1;
+                for (var i = 1; i < arrData.length; i++) {
+                    if(i>1){line = line + ',{"type":"';}
+                    
+                    if (arrData[i] == ';' && arrData[i+1] == 'O' && arrData[i+2] == ';') {
+                        line=line + 'text","name":"Question ' + String(pom) + '","title":"';
+                        pom = pom + 1;
+                        pom1 = pom1 + 1;
+                        i=i+6;
+                        while (arrData[i]!=';')
+                        {
+                            line=line+arrData[i];
+                            i = i + 1;
+                        }
+                        line=line+ '"}';
+                        i=i+4;
+                        
+                    }
+                    else if (arrData[i] == ';' && arrData[i+1] == 'W' && arrData[i+2] == ';') {
+                        line=line+'radiogroup","name":"Question ' + String(pom) + '","title":"';
+                        pom = pom + 1;
+                        
+                        i=i+6;
+                        while (arrData[i]!=';')
+                            {
+                                line=line+arrData[i];
+                                i = i + 1;
+                            }
+                            i=i+1;
+                        line = line + '","choices":[';
+                        for (var j=1 ; j<=4; j++)
+                        {
+                            line=line+'{"value":"item'+String(j)+'","text":"';
+                            while (arrData[i]!=';')
+                            {
+                                line=line+arrData[i];
+                                i = i + 1;
+                            }
+                            if(j==4)
+                            {
+                                line=line+'"}';
+                            }
+                            else line=line+'"},';
+                            i=i+1;
+                        }
                         i=i+1;
-                        pom=pom+1;
+                        line=line+ ']}';
                     }
-                    else if (arrData[i] == ',' && arrData[i+1] == '\n') {
-                        line='"},{"';
-                        i=i+1;
-                    }
-                    else if (arrData[i] == ':' ) {
-                        line='":"';
-                    }
-                    else if (arrData[i] == ',') {
-                        line='","';
-                    }
-                    else line = arrData[i];
-                    aa += line;
+
                 }
-                aa=aa+'"}';
-                for (var i = 0; i < pom; i++) {
-                    aa=aa+']}';
-                }            
+                
+                
+                aa += line;
+                aa=aa+']}]}';
+                
+                // console.log(aa);
                 therows[0]=aa;
-                console.log(JSON.stringify(JSON.parse(therows)));
+                // console.log(JSON.stringify(JSON.parse(therows)));
                     
                 $.ajax({
                     headers: {
